@@ -9,10 +9,7 @@ $(document).ready(function () {
     //alert("Hola");
     _getList();
 
-  
-   
 });
-
 function _getList() {
     //debugger;
     $.ajax({

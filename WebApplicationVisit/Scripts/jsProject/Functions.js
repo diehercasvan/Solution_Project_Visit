@@ -106,3 +106,76 @@ function StorageLogin(data) {
         // Sorry! No Web Storage support..
     }
 }
+//Function clear input 
+function clearInput(get_from) {
+   
+    //Type input 
+    let fromInput = $(get_from + ' form :input');
+    fromInput.val("");
+    fromInput.removeClass('invalid');
+    //Type text 
+    let fromtext = $(get_from + ' form :input[type=text]');
+    fromtext.val("");
+    fromtext.removeClass('valid');
+    //Type tel     
+    let fromTel = $(get_from + ' form :input[type=tel]');
+    fromTel.val("");
+    fromTel.removeClass('valid');
+    //Type number
+    let fromNumber = $(get_from + ' form :input[type=number]');
+    fromNumber.val("");
+    fromNumber.removeClass('valid');
+    //Type email
+    let fromMail = $(get_from + ' form :input[type=email]');
+    fromMail.val("");
+    fromMail.removeClass('valid');
+    //Type password
+    let fromPassword = $(get_from + ' form :input[type=password]');
+    fromPassword.val("");
+    fromPassword.removeClass('valid');
+    //Type label
+    let fromLabel = $(get_from + ' form label');
+    fromLabel.removeClass('active');
+    //Type i
+    let fromI = $(get_from + ' form i');
+    fromI.removeClass('active');
+
+
+  
+}
+//Function clear input 
+function disableEnableInput(dataForm, type) {
+    let get_from = '#form' + dataForm;
+    let selectValidate = true;
+    if(type!=0){
+        selectValidate = false;
+    }
+    else{
+        selectValidate = true;
+    }
+    //Type input 
+    let fromInput = $(get_from + ' form :input');
+    fromInput.prop('disabled', selectValidate);
+
+    //Type text 
+    let fromtext = $(get_from + ' form :input[type=text]');
+    fromtext.prop('disabled', selectValidate);
+
+    //Type tel     
+    let fromTel = $(get_from + ' form :input[type=tel]');
+    fromTel.prop('disabled', selectValidate);
+
+    //Type number
+    let fromNumber = $(get_from + ' form :input[type=number]');
+    fromNumber.prop('disabled', selectValidate);
+   
+    //Type email
+    let fromMail = $(get_from + ' form :input[type=email]');
+    fromMail.prop('disabled', selectValidate);
+
+    //Type password
+    let fromPassword = $(get_from + ' form :input[type=password]');
+    fromPassword.prop('disabled', selectValidate);
+    
+
+}

@@ -4,6 +4,9 @@ Create :DIEGO CASALLAS
 Date :26/10/2016
 
 */
+//Declarate Variable 
+var sNameTitle="Empleado"
+//Start DOM html jQuery
 $(document).ready(function () {
 
 
@@ -22,11 +25,11 @@ function selectionItem(item) {
         $(items+i).css('color', 'black');
     }
     $(items + item).css('color', '#29b6f6');
-    selectionSubItems(item + "_0");
+    selectionSubItems(item + "_0"," ", 0);
   
 }
 //Function select sub Items
-function selectionSubItems(subItem) {
+function selectionSubItems(subItem,Form,typeSelection) {
     let items = "#subItem_" + subItem;
  
     $('.collection-item').css("background-color", "#fff");
@@ -36,8 +39,21 @@ function selectionSubItems(subItem) {
     $(items).css("color", "#eafaf9");
    
     let text = $(items).text();
-    $('#titleForm').text(text);
+    $('#titleForm').text(sNameTitle+" "+text);
+    
+   
+    if (Form != " ") {
+        subItem = Form;
+    }
+    if (typeSelection != 0) {
+        $('#cont_search_' + subItem).css("display", "block");
+        disableEnableInput(subItem, 0)
+    } else {
+        $('#cont_search_' + subItem).css("display", "none");
+        disableEnableInput(subItem, 1)
+    }
     selectForm(subItem);
+
 
 }
 //Function select Item mobile
@@ -75,7 +91,9 @@ function selectionMsubItems(subItem,item) {
 //Function select form  
 function selectForm(dataForm) {
     $(".form_select").css("display", "none");
-    $('#form' + dataForm).fadeIn("slow");
+    let form = '#form' + dataForm;
+    $(form).fadeIn("slow");
+    clearInput(form);
 }
 //Function validate create
 //Load data of form
