@@ -4,8 +4,6 @@
 }
 
 <!DOCTYPE html>
-
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -30,7 +28,7 @@
         <div class="nav-wrapper container">
             <a href="#!" class="brand-logo hide-on-large-only">  <i class="material-icons">cloud</i> </a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="/Home/Home"><i class="material-icons">store</i></a></li>
+                <li><a title="Home" href="/Home/Home"><i class="material-icons">store</i></a></li>
                 <li><a class="modal-trigger waves-effect waves-light" href="#modalInformation"><i class="material-icons">info_outline</i></a></li>
                 <li><a href="#" onclick="closeSession()"><i class="material-icons">lock</i></a></li>
             </ul>
@@ -44,36 +42,23 @@
                             <ul class="collapsible" data-collapsible="accordion">
                                 <li class="z-depth-1">
                                     <!--Header Info List-->
-                                    <div class="collapsible-header activeItem" onclick="selectionMitem(0)" id="mItem_0"><h6 class="right-align">Item 0</h6></div>
+                                    <div class="collapsible-header activeItem" onclick="selectionMitem(0)" id="mItem_0"><h6 class="right-align">Empleado</h6></div>
                                     <!--Start Body Info List Selection Items-->
                                     <div class="collapsible-body">
                                         <!--Start  Items-->
                                         <div class="collection">
-                                            <a href="#!" class="collection-item active" onclick="selectionMsubItems('0_0')" id="mSubItem_0_0">Sub Item 0</a>
-                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('0_1')" id="mSubItem_0_1">Sub Item 1</a>
-                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('0_2')" id="mSubItem_0_2">Sub Item 2</a>
-                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('0_3')" id="mSubItem_0_3">Sub Item 3</a>
+                                            <a href="#!" class="collection-item active" onclick="selectionMsubItems('0_0')" id="mSubItem_0_0">Buscar Empleado</a>
+                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('0_1')" id="mSubItem_0_1">Crear Empleado</a>
+                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('0_2')" id="mSubItem_0_2">Modificar Empleado</a>
+                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('0_3')" id="mSubItem_0_3">Eliminar Empleado</a>
+                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('0_4')" id="mSubItem_0_4">Eliminar Empleado</a>
+                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('0_5')" id="mSubItem_0_5">Crear Rol</a>
                                         </div>
                                         <!--End  Items-->
                                     </div>
                                     <!--End Body Info List Selection Items-->
                                 </li>
-                                <li class="z-depth-1">
-                                    <!--Header Info List-->
-                                    <div class="collapsible-header activeItem" onclick="selectionMitem(1)" id="mItem_1"><h6 class="right-align">Item 1</h6></div>
-                                    <!--Start Body Info List Selection Items-->
-                                    <div class="collapsible-body">
-                                        <!--Start  Items-->
-                                        <div class="collection">
-                                            <a href="#!" class="collection-item active" onclick="selectionMsubItems('1_0')" id="mSubItem_1_0">Sub Item 0</a>
-                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('1_1')" id="mSubItem_1_1">Sub Item 1</a>
-                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('1_2')" id="mSubItem_1_2">Sub Item 2</a>
-                                            <a href="#!" class="collection-item" onclick="selectionMsubItems('1_3')" id="mSubItem_1_3">Sub Item 3</a>
-                                        </div>
-                                        <!--End  Items-->
-                                    </div>
-                                    <!--End Body Info List Selection Items-->
-                                </li>
+                               
 
                             </ul>
                             <!--End Conten Menu Collapsible-->
@@ -111,15 +96,17 @@
                         <ul class="collapsible popout" data-collapsible="accordion">
                             <li>
                                 <!--Header Info List-->
-                                <div class="collapsible-header active activeItem" onclick="selectionItem(0)" id="item_0"><i class="material-icons">settings_applications</i>Item 0</div>
+                                <div class="collapsible-header active activeItem" onclick="selectionItem(0)" id="item_0"><i class="material-icons">settings_applications</i>Empleado</div>
                                 <!--Start Body Info List Selection Items-->
                                 <div class="collapsible-body">
                                     <!--Start  Items-->
                                     <div class="collection">
-                                        <a href="#!" class="collection-item active" onclick="selectionSubItems('0_0')" id="subItem_0_0">Sub Item 0</a>
-                                        <a href="#!" class="collection-item" onclick="selectionSubItems('0_1')" id="subItem_0_1">Sub Item 1</a>
-                                        <a href="#!" class="collection-item" onclick="selectionSubItems('0_2')" id="subItem_0_2">Sub Item 2</a>
-                                        <a href="#!" class="collection-item" onclick="selectionSubItems('0_3')" id="subItem_0_3">Sub Item 3</a>
+                                        <a href="#!" class="collection-item active" onclick="selectionSubItems('0_0')" id="subItem_0_0">Buscar Empleado</a>
+                                        <a href="#!" class="collection-item" onclick="selectionSubItems('0_1')" id="subItem_0_1">Crear Empleado</a>
+                                        <a href="#!" class="collection-item" onclick="selectionSubItems('0_2')" id="subItem_0_2">Modificar Empleado</a>
+                                        <a href="#!" class="collection-item" onclick="selectionSubItems('0_3')" id="subItem_0_3">Eliminar Empleado</a>
+                                        <a href="#!" class="collection-item" onclick="selectionSubItems('0_4')" id="subItem_0_4">Eliminar Empleado Prueba</a>
+                                        <a href="#!" class="collection-item" onclick="selectionSubItems('0_5')" id="subItem_0_5">Crear Rol</a>
                                     </div>
                                     <!--End  Items-->
                                 </div>
@@ -149,7 +136,7 @@
             </div>
             <!--End Menu Side-->
             <div class="col s12 m12 l10">
-                <h4 id="titleForm">Item 0</h4>
+                <h4 id="titleForm">Empleado</h4>
                 <!--Start Container Form 0-->
                 <div id="form0_0" class="form_select">
                     <!--The onSubmit is responsible for executing the function to validate the text boxes correctly before sending data-->
@@ -160,23 +147,121 @@
                         <div class="row">
                             <!--Start Elements -->
                             <div class="input-field col s12 m6 l4">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input id="icon_prefix" type="text" class="validate" required>
-                                <label for="icon_prefix">First Name</label>
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input id="emp_name" type="text" class="validate" required>
+                                <label for="emp_name">Nombre</label>
                             </div>
                             <!--End Elements -->
                             <!--Start Elements -->
                             <div class="input-field col s12 m6 l4">
-                                <i class="material-icons prefix">phone</i>
-                                <input id="icon_telephone" type="tel" class="validate" required>
-                                <label for="icon_telephone">Telephone</label>
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input id="emp_surname" type="text" class="validate" required>
+                                <label for="emp_surname">Apellido</label>
                             </div>
                             <!--End Elements -->
                             <!--Start Elements -->
                             <div class="input-field col s12 m6 l4">
-                                <i class="material-icons prefix">phone</i>
-                                <input id="icon_telephone" type="tel" class="validate" required>
-                                <label for="icon_telephone">Telephone</label>
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input id="emp_document" type="text" class="validate" required>
+                                <label for="emp_document">Documento</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">contact_phone</i>
+                                <input id="emp_phone" type="tel" class="validate" required>
+                                <label for="emp_phone">Telefono</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">contact_phone</i>
+                                <input id="emp_phone2" type="tel" class="validate">
+                                <label for="emp_phone2">Telefono 2</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">perm_phone_msg</i>
+                                <input id="emp_cel_phone" type="tel" class="validate" required>
+                                <label for="emp_cel_phone">Celular</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">perm_phone_msg</i>
+                                <input id="emp_cel_phone2" type="tel" class="validate">
+                                <label for="emp_cel_phone2">Celular 2</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">email</i>
+                                <input id="emp_mail" type="email" class="validate" required>
+                                <label for="emp_mail">Email</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">email</i>
+                                <input id="emp_mail2" type="email" class="validate" >
+                                <label for="emp_mail2">Email 2</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">room</i>
+                                <input id="emp_direccion" type="text" class="validate" required>
+                                <label for="emp_direccion">Direccion</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">lock</i>
+                                <input id="emp_password" type="password" class="validate" required>
+                                <label for="emp_password">Contraseña </label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">lock</i>
+                                <input id="emp_password_confirm" type="password" class="validate" required>
+                                <label for="emp_password_confirm">Confirmar contraseña</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <select>
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                                <label>Materialize Select</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <select>
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                                <label>Materialize Select</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>File</span>
+                                        <input type="file">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
                             </div>
                             <!--End Elements -->
 
@@ -242,6 +327,193 @@
                     </form>
                 </div>
                 <!--End Form 1-->
+                <!--Start Container Form 2-->
+                <div id="form0_2" class="form_select">
+                    <!--The onSubmit is responsible for executing the function to validate the text boxes correctly before sending data-->
+                    <form class="col s12  m12 l12" onsubmit="validateCreate(event)">
+                        <!-- Start Elements input
+                to remember: Elements unique with id of Button and input
+                -->
+                        <div class="row">
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input id="emp_name" type="text" class="validate" required>
+                                <label for="emp_name">Nombre</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input id="emp_surname" type="text" class="validate" required>
+                                <label for="emp_surname">Apellido</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input id="emp_document" type="text" class="validate" required>
+                                <label for="emp_document">Documento</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">contact_phone</i>
+                                <input id="emp_phone" type="tel" class="validate" required>
+                                <label for="emp_phone">Telefono</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">contact_phone</i>
+                                <input id="emp_phone2" type="tel" class="validate">
+                                <label for="emp_phone2">Telefono 2</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">perm_phone_msg</i>
+                                <input id="emp_cel_phone" type="tel" class="validate" required>
+                                <label for="emp_cel_phone">Celular</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">perm_phone_msg</i>
+                                <input id="emp_cel_phone2" type="tel" class="validate">
+                                <label for="emp_cel_phone2">Celular 2</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">email</i>
+                                <input id="emp_mail" type="email" class="validate" required>
+                                <label for="emp_mail">Email</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">email</i>
+                                <input id="emp_mail2" type="email" class="validate">
+                                <label for="emp_mail2">Email 2</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">room</i>
+                                <input id="emp_direccion" type="text" class="validate" required>
+                                <label for="emp_direccion">Direccion</label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">lock</i>
+                                <input id="emp_password" type="password" class="validate" required>
+                                <label for="emp_password">Contraseña </label>
+                            </div>
+                            <!--End Elements -->
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">lock</i>
+                                <input id="emp_password_confirm" type="password" class="validate" required>
+                                <label for="emp_password_confirm">Confirmar contraseña</label>
+                            </div>
+                            <!--End Elements -->
+
+                        </div>
+                        <!-- End Elements input-->
+                        <!--Start Elements Button-->
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="card-action center">
+                                    <button id="login" class="btn waves-effect waves-light" type="submit" name="action">
+                                        Enviar
+                                        <i class="material-icons right">done</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Elements Button-->
+                    </form>
+                </div>
+                <!--End Form 2-->
+                <!--Start Container Form 3-->
+                <div id="form0_3" class="form_select">
+                    <!--The onSubmit is responsible for executing the function to validate the text boxes correctly before sending data-->
+                    <form class="col s12  m12 l12" onsubmit="validateCreate(event)">
+                        <!-- Start Elements input to remember: Elements unique with id of Button and input-->
+                        <div class="row">
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <i class="material-icons prefix">perm_identity</i>
+                                <input id="emp_name1" type="text" class="validate" required>
+                                <label for="emp_name1">Nombre</label>
+                            </div>
+                            <!--End Elements -->
+
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <select>
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                                <label>Materialize Select</label>
+                            </div>
+                            <!--End Elements -->
+                        </div>
+                        <!-- End Elements input-->
+                        <!--Start Elements Button-->
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="card-action center">
+                                    <button id="login" class="btn waves-effect waves-light" type="submit" name="action">
+                                        Enviar
+                                        <i class="material-icons right">done</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Elements Button-->
+                    </form>
+                </div>
+                <!--End Form 5-->
+                <!--Start Container Form 5-->
+                <div id="form0_5" class="form_select">
+                    <!--The onSubmit is responsible for executing the function to validate the text boxes correctly before sending data-->
+                    <form class="col s12  m12 l12" onsubmit="validateCreate(event)">
+                        <!-- Start Elements input to remember: Elements unique with id of Button and input-->
+                        <div class="row">
+                           
+                            <!--Start Elements -->
+                            <div class="input-field col s12 m6 l4">
+                                <select>
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                                <label>Materialize Select</label>
+                            </div>
+                            <!--End Elements -->
+                        </div>
+                        <!-- End Elements input-->
+                        <!--Start Elements Button-->
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="card-action center">
+                                    <button id="login" class="btn waves-effect waves-light" type="submit" name="action">
+                                        Enviar
+                                        <i class="material-icons right">done</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Elements Button-->
+                    </form>
+                </div>
+                <!--End Form 5-->
 
 
             </div>

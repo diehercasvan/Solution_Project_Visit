@@ -10,6 +10,7 @@ $(document).ready(function () {
     $('.button-collapse').sideNav();
     selectionItem(0);
     $('.modal-trigger').leanModal();
+    $('select').material_select();
   //validateSession(document.URL);
 
 });
