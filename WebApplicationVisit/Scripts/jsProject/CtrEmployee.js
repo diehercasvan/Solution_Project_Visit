@@ -11,7 +11,7 @@ $(document).ready(function () {
 
 
     $('.button-collapse').sideNav();
-    selectionItem(0);
+    selectionItem("item_0");
     $('.modal-trigger').leanModal();
     $('select').material_select();
   //validateSession(document.URL);
@@ -28,50 +28,53 @@ function selectionItem(item) {
     selectionSubItems(item + "_0"," ", 0);
   
 }
+function selectionItem(item) {
+    let items = item.replace("item", "subItem") + "_0";
+    $('.collapsible - header').css('color', 'black');
+    $('.collapsible - header').css('color', 'black');
+    $("#" + item + "").css('color', '#29b6f6');
+    selectionSubItems(items, "0_0", false, false)
+}
 //Function select sub Items
-function selectionSubItems(subItem,Form,typeSelection) {
-    let items = "#subItem_" + subItem;
- 
+function selectionSubItems(subItem, Form, cont_search) {
+
+    let items = "#" + subItem + "";
+
     $('.collection-item').css("background-color", "#fff");
     $('.collection-item').css("color", "#26a69a");
 
     $(items).css("background-color", "#26a69a");
     $(items).css("color", "#eafaf9");
-   
     let text = $(items).text();
-    $('#titleForm').text(sNameTitle+" "+text);
-    
-   
-    if (Form != " ") {
-        subItem = Form;
-    }
-    if (typeSelection != 0) {
-        $('#cont_search_' + subItem).css("display", "block");
-        disableEnableInput(subItem, 0)
+    $('#titleForm ' + sNameTitle).text(text);
+
+
+    if (cont_search) {
+        $('#cont_search_' + Form).css("display", "block");
+        disableEnableInput(Form, 0)
     } else {
-        $('#cont_search_' + subItem).css("display", "none");
-        disableEnableInput(subItem, 1)
+        $('#cont_search_' + Form).css("display", "none");
+        disableEnableInput(Form, 1)
     }
-    selectForm(subItem);
+    selectForm(Form);
 
 
 }
 //Function select Item mobile
 function selectionMitem(item) {
-    let items = "#mItem_";
-    
-    for (var i = 0; i < 2; i++) {
-        $(items + i).css('color', 'black');
-    }
-    $(items + item).css('color', '#29b6f6');
-    selectionMsubItems(item + "_0", item);
+    let items = item.replace("mItem","mSubItem")+"_0";
+    $('.collapsible - header').css('color', 'black');
+    $('.collapsible - header').css('color', 'black');
+    $("#"+item+"").css('color', '#29b6f6');
+    selectionMsubItems(items, "0_0", false, false)
 
+    
 
 }
 //Function select sub Items Mobile
-function selectionMsubItems(subItem,item) {
-    
-    let items = "#mSubItem_" + subItem;
+function selectionMsubItems(subItem, Form, cont_search, nav_mobile) {
+
+    let items = "#" + subItem+"";
 
     $('.collection-item').css("background-color", "#fff");
     $('.collection-item').css("color", "#26a69a");
@@ -79,13 +82,22 @@ function selectionMsubItems(subItem,item) {
     $(items).css("background-color", "#26a69a");
     $(items).css("color", "#eafaf9");
     let text = $(items).text();
-    $('#titleForm').text(text);
+    $('#titleForm '+sNameTitle).text(text);
  
-    if (typeof item == 'undefined') {
+    if (nav_mobile) {
         if ($('.button-collapse').is(":visible")) {
             $('.button-collapse').sideNav('hide');
         }
     }
+    
+    if (cont_search) {
+        $('#cont_search_' + Form).css("display", "block");
+        disableEnableInput(Form, 0)
+    } else {
+        $('#cont_search_' + Form).css("display", "none");
+        disableEnableInput(Form, 1)
+    }
+    selectForm(Form);
 
 }
 //Function select form  

@@ -51,21 +51,43 @@
                                 <!--Start items menu mobile-->
                                 <li class="z-depth-1">
                                     <!--Header Info List-->
-                                    <div class="collapsible-header activeItem" onclick="selectionMitem(0)" id="mItem_0"><h6 class="right-align">Empleado</h6></div>
+                                    <div class="collapsible-header activeItem" onclick="selectionMitem(this.id)" id="mItem_0"><h6 class="right-align">Empleado</h6></div>
                                     <!--Start Body Info List Selection Items-->
                                     <div class="collapsible-body">
                                         <!--Start  Items-->
                                         <div class="collection">
-                                            <a href="#!" class="collection-item active per_user_3" onclick="selectionMsubItems('0_0')" id="mSubItem_0_0">Buscar</a>
-                                            <a href="#!" class="collection-item per_user_0" onclick="selectionMsubItems('0_1')" id="mSubItem_0_1">Crear</a>
-                                            <a href="#!" class="collection-item per_user_1" onclick="selectionMsubItems('0_2')" id="mSubItem_0_2">Modificar</a>
-                                            <a href="#!" class="collection-item per_user_2" onclick="selectionMsubItems('0_3')" id="mSubItem_0_3">Eliminar</a>
+                                            
+                                            <a href="#!" class="collection-item active per_user_3" onclick="selectionMsubItems(this.id, '0_0', false, true)" id="mSubItem_0_0">Buscar</a>
+                                            <a href="#!" class="collection-item per_user_0" onclick="selectionMsubItems(this.id, '0_1', false, true)" id="mSubItem_0_1">Crear</a>
+                                            <a href="#!" class="collection-item per_user_1" onclick="selectionMsubItems(this.id, '0_1', true, true)" id="mSubItem_0_2">Modificar</a>
+                                            <a href="#!" class="collection-item per_user_2" onclick="selectionMsubItems(this.id, '0_3', false, true)" id="mSubItem_0_3">Eliminar</a>
                                         </div>
                                         <!--End  Items-->
                                     </div>
                                     <!--End Body Info List Selection Items-->
                                 </li>
                                 <!--End items menu mobile-->
+
+                                <!--Start items menu mobile-->
+                                <li class="z-depth-1">
+                                    <!--Header Info List-->
+                                    <div class="collapsible-header activeItem" onclick="selectionMitem(this.id)" id="mItem_1"><h6 class="right-align">Empleado</h6></div>
+                                    <!--Start Body Info List Selection Items-->
+                                    <div class="collapsible-body">
+                                        <!--Start  Items-->
+                                        <div class="collection">
+
+                                            <a href="#!" class="collection-item active per_user_3" onclick="selectionMsubItems('0_0','',false,false)" id="mSubItem_0_0">Buscar</a>
+                                            <a href="#!" class="collection-item per_user_0" onclick="selectionMsubItems('0_1', '', false, false)" id="mSubItem_0_1">Crear</a>
+                                            <a href="#!" class="collection-item per_user_1" onclick="selectionMsubItems('0_2', '0_1', true, false)" id="mSubItem_0_2">Modificar</a>
+                                            <a href="#!" class="collection-item per_user_2" onclick="selectionMsubItems('0_3', '', false, false)" id="mSubItem_0_3">Eliminar</a>
+                                        </div>
+                                        <!--End  Items-->
+                                    </div>
+                                    <!--End Body Info List Selection Items-->
+                                </li>
+                                <!--End items menu mobile-->
+
                             </ul>
                             <!--End Conten Menu Collapsible-->
                         </li>
@@ -103,15 +125,15 @@
                             <!--Start Block menu -->
                             <li>
                                 <!--Header Info List-->
-                                <div class="collapsible-header active activeItem" onclick="selectionItem(0)" id="item_0"><i class="material-icons">settings_applications</i>Empleado</div>
+                                <div class="collapsible-header active activeItem" onclick="selectionItem(this.id)" id="item_0"><i class="material-icons">settings_applications</i>Empleado</div>
                                 <!--Start Body Info List Selection Items-->
                                 <div class="collapsible-body">
                                     <!--Start  Items-->
                                     <div class="collection">
-                                        <a href="#!" class="collection-item active per_user_3" onclick="selectionSubItems('0_0',' ',0)" id="subItem_0_0">Buscar</a>
-                                        <a href="#!" class="collection-item per_user_1" onclick="selectionSubItems('0_1',' ', 0)" id="subItem_0_1">Crear </a>
-                                        <a href="#!" class="collection-item per_user_2" onclick="selectionSubItems('0_2','0_1',1)" id="subItem_0_2">Modificar</a>
-                                        <a href="#!" class="collection-item per_user_3" onclick="selectionSubItems('0_3',' ',0)" id="subItem_0_3">Eliminar </a>
+                                        <a href="#!" class="collection-item active per_user_3" onclick="selectionSubItems(this.id, '0_0', false)" id="subItem_0_0">Buscar</a>
+                                        <a href="#!" class="collection-item per_user_1" onclick="selectionSubItems(this.id, '0_1', false)" id="subItem_0_1">Crear </a>
+                                        <a href="#!" class="collection-item per_user_2" onclick="selectionSubItems(this.id, '0_1', true)" id="subItem_0_2">Modificar</a>
+                                        <a href="#!" class="collection-item per_user_3" onclick="selectionSubItems(this.id, '0_3', false)" id="subItem_0_3">Eliminar </a>
 
                                     </div>
                                     <!--End  Items-->
@@ -122,15 +144,15 @@
                             <!--Start Block menu -->
                             <li>
                                 <!--Header Info List-->
-                                <div class="collapsible-header" onclick="selectionItem(1)" id="item_1"><i class="material-icons">settings_applications</i>Item 1</div>
+                                <div class="collapsible-header" onclick="selectionItem(this.id)" id="item_1"><i class="material-icons">settings_applications</i>Item 1</div>
                                 <!--Start Body Info List Selection Items-->
                                 <div class="collapsible-body">
                                     <!--Start  Items-->
                                     <div class="collection">
-                                        <a href="#!" class="collection-item active" onclick="selectionSubItems('1_0')" id="subItem_1_0">Sub Item 0</a>
-                                        <a href="#!" class="collection-item" onclick="selectionSubItems('1_1')" id="subItem_1_1">Sub Item 1</a>
-                                        <a href="#!" class="collection-item" onclick="selectionSubItems('1_2')" id="subItem_1_2">Sub Item 2</a>
-                                        <a href="#!" class="collection-item" onclick="selectionSubItems('1_3')" id="subItem_1_3">Sub Item 3</a>
+                                        <a href="#!" class="collection-item active" onclick="selectionSubItems(this.id, '1_0', false)" id="subItem_1_0">Sub Item 0</a>
+                                        <a href="#!" class="collection-item" onclick="selectionSubItems(this.id, '1_1', false)" id="subItem_1_1">Sub Item 1</a>
+                                        <a href="#!" class="collection-item" onclick="selectionSubItems(this.id, '1_1', false)" id="subItem_1_2">Sub Item 2</a>
+                                        <a href="#!" class="collection-item" onclick="selectionSubItems(this.id, '1_3', false)" id="subItem_1_3">Sub Item 3</a>
                                     </div>
                                     <!--End  Items-->
                                 </div>
