@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Project_VisitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="Project_VisitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="BRANCH_COMPANY">
           <Key>
             <PropertyRef Name="BRA_BUIS_ID" />
@@ -420,6 +420,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="PR_SEARCH_EMPLOYEE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="State" Type="bit" Mode="In" />
+          <Parameter Name="IdBusiness" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PR_SEARCH_EMPLOYEE_SELECTION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="State" Type="bit" Mode="In" />
+          <Parameter Name="IdBusiness" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="Document" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Role" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Project_VisitModelStoreContainer">
           <EntitySet Name="BRANCH_COMPANY" EntityType="Self.BRANCH_COMPANY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BRANCH_OFFICE" EntityType="Self.BRANCH_OFFICE" Schema="dbo" store:Type="Tables" />
@@ -512,8 +525,7 @@
             <End Role="VISITS" EntitySet="VISITS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Project_VisitModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -1059,7 +1071,52 @@
             <End Role="QUOTATION_STATE" EntitySet="QUOTATION_STATE" />
             <End Role="QUOTATION" EntitySet="QUOTATION" />
           </AssociationSet>
+          <FunctionImport Name="PR_SEARCH_EMPLOYEE" ReturnType="Collection(Project_VisitModel.PR_SEARCH_EMPLOYEE_Result)">
+            <Parameter Name="State" Mode="In" Type="Boolean" />
+            <Parameter Name="IdBusiness" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PR_SEARCH_EMPLOYEE_SELECTION" ReturnType="Collection(Project_VisitModel.PR_SEARCH_EMPLOYEE_SELECTION_Result)">
+            <Parameter Name="State" Mode="In" Type="Boolean" />
+            <Parameter Name="IdBusiness" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Document" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="PR_SEARCH_EMPLOYEE_Result">
+          <Property Type="Int32" Name="EMP_ID" Nullable="false" />
+          <Property Type="String" Name="EMP_NAME" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_SURNAME" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_DOCUMENT" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_PHONE" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_PHONE2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="EMP_CELL_PHONE" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_CELL_PHONE2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="EMP_MAIL" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_MAIL2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="EMP_ADDRES" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_PHOTO" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="ROL_ID" Nullable="false" />
+          <Property Type="String" Name="ROL_NAME" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="PR_SEARCH_EMPLOYEE_SELECTION_Result">
+          <Property Type="Int32" Name="EMP_ID" Nullable="false" />
+          <Property Type="String" Name="EMP_NAME" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_SURNAME" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_DOCUMENT" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_PHONE" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_PHONE2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="EMP_CELL_PHONE" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_CELL_PHONE2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="EMP_MAIL" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_MAIL2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="EMP_ADDRES" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EMP_PHOTO" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="ROL_ID" Nullable="false" />
+          <Property Type="String" Name="ROL_NAME" Nullable="false" MaxLength="255" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1279,6 +1336,46 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PR_SEARCH_EMPLOYEE" FunctionName="Project_VisitModel.Store.PR_SEARCH_EMPLOYEE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Project_VisitModel.PR_SEARCH_EMPLOYEE_Result">
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="EMP_NAME" ColumnName="EMP_NAME" />
+                <ScalarProperty Name="EMP_SURNAME" ColumnName="EMP_SURNAME" />
+                <ScalarProperty Name="EMP_DOCUMENT" ColumnName="EMP_DOCUMENT" />
+                <ScalarProperty Name="EMP_PHONE" ColumnName="EMP_PHONE" />
+                <ScalarProperty Name="EMP_PHONE2" ColumnName="EMP_PHONE2" />
+                <ScalarProperty Name="EMP_CELL_PHONE" ColumnName="EMP_CELL_PHONE" />
+                <ScalarProperty Name="EMP_CELL_PHONE2" ColumnName="EMP_CELL_PHONE2" />
+                <ScalarProperty Name="EMP_MAIL" ColumnName="EMP_MAIL" />
+                <ScalarProperty Name="EMP_MAIL2" ColumnName="EMP_MAIL2" />
+                <ScalarProperty Name="EMP_ADDRES" ColumnName="EMP_ADDRES" />
+                <ScalarProperty Name="EMP_PHOTO" ColumnName="EMP_PHOTO" />
+                <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+                <ScalarProperty Name="ROL_NAME" ColumnName="ROL_NAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PR_SEARCH_EMPLOYEE_SELECTION" FunctionName="Project_VisitModel.Store.PR_SEARCH_EMPLOYEE_SELECTION">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Project_VisitModel.PR_SEARCH_EMPLOYEE_SELECTION_Result">
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="EMP_NAME" ColumnName="EMP_NAME" />
+                <ScalarProperty Name="EMP_SURNAME" ColumnName="EMP_SURNAME" />
+                <ScalarProperty Name="EMP_DOCUMENT" ColumnName="EMP_DOCUMENT" />
+                <ScalarProperty Name="EMP_PHONE" ColumnName="EMP_PHONE" />
+                <ScalarProperty Name="EMP_PHONE2" ColumnName="EMP_PHONE2" />
+                <ScalarProperty Name="EMP_CELL_PHONE" ColumnName="EMP_CELL_PHONE" />
+                <ScalarProperty Name="EMP_CELL_PHONE2" ColumnName="EMP_CELL_PHONE2" />
+                <ScalarProperty Name="EMP_MAIL" ColumnName="EMP_MAIL" />
+                <ScalarProperty Name="EMP_MAIL2" ColumnName="EMP_MAIL2" />
+                <ScalarProperty Name="EMP_ADDRES" ColumnName="EMP_ADDRES" />
+                <ScalarProperty Name="EMP_PHOTO" ColumnName="EMP_PHOTO" />
+                <ScalarProperty Name="ROL_ID" ColumnName="ROL_ID" />
+                <ScalarProperty Name="ROL_NAME" ColumnName="ROL_NAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

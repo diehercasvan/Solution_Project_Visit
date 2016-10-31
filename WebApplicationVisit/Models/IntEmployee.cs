@@ -10,8 +10,8 @@ namespace Aplication_Visit.Models
     interface IntEmployee
     {
         //Method for  list employee
-        List<DtoEmployee> listEmployee();
-        List<DtoEmployee> listEmployeeSelect(string selection);
+        List<DtoEmployee> ListEmployee(DtoEmployee emp);
+        List<DtoEmployee> listEmployeeSelect(DtoEmployee emp);
         //Method for  insert employee
         Boolean insertEmployee(DtoEmployee emp);
         //Method for  update employee

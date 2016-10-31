@@ -12,6 +12,9 @@ namespace DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class Entities_Visit : DbContext
     {
@@ -43,5 +46,51 @@ namespace DAL
         public DbSet<ROLE> ROLE { get; set; }
         public DbSet<USES> USES { get; set; }
         public DbSet<VISITS> VISITS { get; set; }
+    
+        public virtual ObjectResult<PR_SEARCH_EMPLOYEE_Result> PR_SEARCH_EMPLOYEE(Nullable<bool> state, Nullable<int> idBusiness)
+        {
+            var stateParameter = state.HasValue ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(bool));
+    
+            var idBusinessParameter = idBusiness.HasValue ?
+                new ObjectParameter("IdBusiness", idBusiness) :
+                new ObjectParameter("IdBusiness", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PR_SEARCH_EMPLOYEE_Result>("PR_SEARCH_EMPLOYEE", stateParameter, idBusinessParameter);
+        }
+    
+        public virtual ObjectResult<PR_SEARCH_EMPLOYEE_SELECTION_Result> PR_SEARCH_EMPLOYEE_SELECTION(Nullable<bool> state, Nullable<int> idBusiness, string name, string surname, string document, string email, string role)
+        {
+            var stateParameter = state.HasValue ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(bool));
+    
+            var idBusinessParameter = idBusiness.HasValue ?
+                new ObjectParameter("IdBusiness", idBusiness) :
+                new ObjectParameter("IdBusiness", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var surnameParameter = surname != null ?
+                new ObjectParameter("Surname", surname) :
+                new ObjectParameter("Surname", typeof(string));
+    
+            var documentParameter = document != null ?
+                new ObjectParameter("Document", document) :
+                new ObjectParameter("Document", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var roleParameter = role != null ?
+                new ObjectParameter("Role", role) :
+                new ObjectParameter("Role", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PR_SEARCH_EMPLOYEE_SELECTION_Result>("PR_SEARCH_EMPLOYEE_SELECTION", stateParameter, idBusinessParameter, nameParameter, surnameParameter, documentParameter, emailParameter, roleParameter);
+        }
     }
 }

@@ -23,7 +23,9 @@
         .cont_search {
             display:none;
         }
-      
+        .id_list {
+              display:none;
+        }
  
     </style>
 </head>
@@ -175,24 +177,26 @@
                 <div id="form0_0" class="form_select">
                     <!--The onSubmit is responsible for executing the function to validate the text boxes correctly before sending data-->
                     <!--Form search-->
-                    <form class="col s12  m12 l12" onsubmit="validateCreate(event)">
+                    <form class="col s12  m12 l12" onsubmit="searchEmployee(event)">
                         <!-- Start Elements inputto remember: Elements unique with id of Button and input-->
                         <div class="row">
                             <!--Start Elements -->
                             <div class="input-field col s12 m3 l3">
-                                <select>
-                                    <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                <select id="listSearchEmployee">
+                                    <option value="" disabled selected>Elija su opción</option>
+                                    <option value="sEmp_name">Nombre</option>
+                                    <option value="sEmp_surname">Apellido</option>
+                                    <option value="sEmp_document">Documento</option>
+                                    <option value="sEmp_mail">Email</option>
+                                    <option value="sRol_name">Rol</option>
                                 </select>
-                                <label>Materialize Select</label>
+                                <label>Seleccine Búsqueda</label>
                             </div>
                             <!--End Elements -->
                             <!--Start Elements -->
                             <div class="input-field col s10 m7 l7">
-                                <input id="emp_search" type="text" class="validate" required>
-                                <label for="emp_search">Digite el valor a buscar</label>
+                                <input id="emp_search" type="text" class="validate">
+                                <label for="emp_search">Digite el dato a buscar</label>
                             </div>
                             <!--End Elements -->
                             <!--Start Elements -->
@@ -211,32 +215,26 @@
                     <!--Start Table result search-->
                     <div class="row">
                         <!--Start Table-->
-                        <div class="col s12 m12 l12">
+                        <div class="col s12 m12 l12" id="listEmployee">
                             <table class="responsive-table highlight">
                                 <thead>
                                     <tr>
-                                        <th data-field="id">Name</th>
-                                        <th data-field="name">Item Name</th>
-                                        <th data-field="price">Item Price</th>
+                                        <th data-field="role">Cargo</th>
+                                        <th data-field="name">Nombre</th>
+                                        <th data-field="surname">Apellido</th>
+                                        <th data-field="document">Documento</th>
+                                        <th data-field="phone">Telefono</th>
+                                        <th data-field="phone2">Telefono 2</th>
+                                        <th data-field="cel_phone">Celular</th>
+                                        <th data-field="cel_phone2">Celular 2</th>
+                                        <th data-field="email">Email</th>
+                                        <th data-field="email2">Email 2</th>
+                                        <th data-field="addres">Direccion </th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td>Alvin</td>
-                                        <td>Eclair</td>
-                                        <td>$0.87</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Alan</td>
-                                        <td>Jellybean</td>
-                                        <td>$3.76</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonathan</td>
-                                        <td>Lollipop</td>
-                                        <td>$7.00</td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                             <!--End Table-->
@@ -251,12 +249,9 @@
                     <!--Start cont search-->
                     <div class="row cont_search" id="cont_search_0_1">
                         <!--Start Elements -->
-                        <div class="input-field col s12 m3 l3">
+                        <div class="input-field col s12 m3 l3" >
                             <select>
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
+                               
                             </select>
                             <label>Materialize Select</label>
                         </div>
@@ -381,26 +376,16 @@
                             <!--End Elements -->
 
                             <!--Start Elements -->
-                            <div class="input-field col s12 m6 l4">
-                                <select>
-                                    <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                </select>
-                                <label>Materialize Select</label>
+                            <div class="input-field col s12 m6 l4" >
+                                <select  id="listRole"></select>
+                                <label>Seleccionar Rol</label>
                             </div>
                             <!--End Elements -->
 
                             <!--Start Elements -->
                             <div class="input-field col s12 m6 l4">
-                                <select>
-                                    <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                </select>
-                                <label>Materialize Select</label>
+                                <select id="listPermission" multiple></select>
+                                <label>Seleccionar Permiso</label>
                             </div>
                             <!--End Elements -->
 
@@ -440,25 +425,26 @@
                 <div id="form0_3" class="form_select">
                     <!--The onSubmit is responsible for executing the function to validate the text boxes correctly before sending data-->
                     <!--Form search-->
-                    <form class="col s12  m12 l12" onsubmit="validateCreate(event)">
+                    <form class="col s12  m12 l12" onsubmit="searchEmployeeDelete(event)">
                         <!-- Start Elements inputto remember: Elements unique with id of Button and input-->
                         <div class="row">
                             <!--Start Elements -->
                             <div class="input-field col s12 m3 l3">
-                                <select>
-                                    <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-
+                                <select id="listSearchEmployeeDelete">
+                                    <option value="" disabled selected>Elija su opción</option>
+                                    <option value="sEmp_name">Nombre</option>
+                                    <option value="sEmp_surname">Apellido</option>
+                                    <option value="sEmp_document">Documento</option>
+                                    <option value="sEmp_mail">Email</option>
+                                    
                                 </select>
-                                <label>Materialize Select</label>
+                                <label>Seleccine Búsqueda</label>
                             </div>
                             <!--End Elements -->
                             <!--Start Elements -->
                             <div class="input-field col s10 m7 l7">
-                                <input id="emp_search" type="text" class="validate" required>
-                                <label for="emp_search">Digite el valor a buscar</label>
+                                <input id="emp_search_delete" type="text" class="validate">
+                                <label for="emp_search_delete">Digite el dato a buscar</label>
                             </div>
                             <!--End Elements -->
                             <!--Start Elements -->
@@ -471,63 +457,28 @@
                             </div>
                             <!--End Elements -->
 
-
                         </div>
                         <!-- End Elements input-->
                     </form>
                     <!--Start Table result search-->
                     <div class="row">
                         <!--Start Table-->
-                        <div class="col s12 m12 l12">
+                        <div class="col s12 m12 l12" id="listEmployeeDelete">
                             <table class="responsive-table highlight">
                                 <thead>
                                     <tr>
-                                        <th data-field="id">Name</th>
-                                        <th data-field="name">Item Name</th>
-                                        <th data-field="price">Item Price</th>
-                                        <th data-field="price">Selection</th>
+                                        <th data-field="role">Cargo</th>
+                                        <th data-field="name">Nombre</th>
+                                        <th data-field="surname">Apellido</th>
+                                        <th data-field="document">Documento</th>
+                                        <th data-field="phone">Telefono</th>
+                                        <th data-field="cel_phone">Celular</th>
+                                        <th data-field="email">Email</th>
+                                        <th data-field="btn_deleteUser">Accion</th>
                                     </tr>
                                 </thead>
 
-                                <tbody>
-                                    <tr>
-                                        <td>Alvin</td>
-                                        <td>Eclair</td>
-                                        <td>$0.87</td>
-                                        <td>
-                                            <div class="card-action center">
-                                                <button id="btn_emp_search" class="btn-floating waves-effect waves-light red" type="submit" name="action">
-                                                    <i class="material-icons right">verified_user</i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Alan</td>
-                                        <td>Jellybean</td>
-                                        <td>$3.76</td>
-                                        <td>
-                                            <div class="card-action center">
-                                                <button id="btn_emp_search" class="btn-floating waves-effect waves-light red" type="submit" name="action">
-                                                    <i class="material-icons right">verified_user</i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonathan</td>
-                                        <td>Lollipop</td>
-                                        <td>$7.00</td>
-                                        <td>
-                                            <div class="card-action center">
-                                                <button id="btn_emp_search" class="btn-floating waves-effect waves-light red" type="submit" name="action">
-                                                    <i class="material-icons right">verified_user</i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                           
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                             <!--End Table-->
                         </div>
