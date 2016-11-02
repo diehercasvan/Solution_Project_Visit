@@ -8,9 +8,9 @@ Date :26/10/2016
 var sNameTitle = "Empleado"
 var oObjectUser;
 var dataJson = new Object();
+var typeTatble = 0;
 //Start DOM html jQuery
 $(document).ready(function () {
-
 
     $('.button-collapse').sideNav();
     selectionItem("item_0");
@@ -22,7 +22,8 @@ $(document).ready(function () {
     dataJson.bemp_state = true;
     dataJson.iBra_buis_id = 1;
     dataJson.bEmp_type_select = true;
-    _getList();
+    typeTatble = 0;
+    _getList(0);
     _getListRol();
     _getListPermission();
     
@@ -150,8 +151,7 @@ function validateSearch(e) {
 //Function database 
 //Function get list user  
 function _getList() {
-    //debugger;
-    
+    //debugger;   
     $.ajax({
         url: "/Employee/ListEmployee",
         cache: false,
@@ -160,95 +160,7 @@ function _getList() {
         data: dataJson,
         dataType: "json",
         success: function (result) {
-            var html = '';
-            $.each(result, function (key, item) {
-                html += '<tr>';
-                html += '<td>' + item.sRol_name + '</td>';
-                html += '<td>' + item.sEmp_name + '</td>';
-                html += '<td>' + item.sEmp_surname + '</td>';
-                html += '<td>' + item.sEmp_document + '</td>';
-                html += '<td>' + item.sEmp_phone + '</td>';
-                html += '<td>' + item.sEmp_phone2 + '</td>';
-                html += '<td>' + item.sEmp_cell_phone + '</td>';
-                html += '<td>' + item.sEmp_cell_phone2 + '</td>';
-                html += '<td>' + item.sEmp_mail + '</td>';
-                html += '<td>' + item.sEmp_mail2 + '</td>';
-                html += '<td>' + item.sEmp_addres + '</td>';
-                html += '</tr>';
-            });
-
-            $('#listEmployee  tbody').html(html);
-
-        },
-        error: function (errorMessage) {
-            alert(errorMessage.responseText);
-        }
-    });
-}
-//Function get list user Select 
-function _getListEmployeeSelect(model) {
-    //debugger;
-   
-    $.ajax({
-        url: "/Employee/ListUserSelect",
-        cache: false,
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        data: model,
-        dataType: "json",
-        success: function (result) {
-            var html = '';
-            $.each(result, function (key, item) {
-                html += '<tr>';
-                
-                html += '<td>' + item.sEmp_name + '</td>';
-                html += '<td>' + item.sEmp_surname + '</td>';
-                html += '<td>' + item.sEmp_document + '</td>';
-                html += '<td>' + item.sEmp_phone + '</td>';
-                html += '<td>' + item.sEmp_phone2 + '</td>';
-                html += '<td>' + item.sEmp_cell_phone + '</td>';
-                html += '<td>' + item.sEmp_cell_phone2 + '</td>';
-                html += '<td>' + item.sEmp_mail + '</td>';
-                html += '<td>' + item.sEmp_mail2 + '</td>';
-                html += '<td>' + item.sEmp_addres + '</td>';
-                html += '</tr>';
-            });
-            
-            $('#listEmployee  tbody').html(html);
-    
-        },
-        error: function (errorMessage) {
-            alert(errorMessage.responseText);
-        }
-    });   
-}
-//Function get list user delete 
-function _getListEmployeeSelectDelete(model) {
-    //debugger;
-
-    $.ajax({
-        url: "/Employee/ListUserSelect",
-        cache: false,
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        data: model,
-        dataType: "json",
-        success: function (result) {
-            var html = '';
-            $.each(result, function (key, item) {
-                html += '<tr>';
-                html += '<td>' + item.sEmp_name + '</td>';
-                html += '<td>' + item.sEmp_surname + '</td>';
-                html += '<td>' + item.sEmp_document + '</td>';
-                html += '<td>' + item.sEmp_phone + '</td>';
-                html += '<td>' + item.sEmp_cell_phone + '</td>';
-                html += '<td>' + item.sEmp_mail + '</td>';
-                html += '<td><button class="btn-floating waves-effect waves-light red" type="button" name="action" onclick="deleteEmployeed(' + item.iEmp_id + ',event)"><i class="material-icons right">verified_user</i></button></td>';
-                html += '</tr>';
-            });
-
-            $('#listEmployeeDelete  tbody').html(html);
-
+            createTable(result);
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
@@ -304,27 +216,23 @@ function searchEmployee(e) {
     
     let listSelection = $('#listSearchEmployee').val();
     let textSearch = $("#emp_search").val();
- 
+    typeTatble = 0;
     let bValidate = true;
     if ((expressionData.test(textSearch) || textSearch.length == 0) && (listSelection == null)) {
         dataJson.bEmp_type_select = true;
+       
         _getList();
-        console.log("Si");
+ 
     } else {
         if ((expressionData.test(textSearch) || textSearch.length == 0) && (listSelection != null)) {
-            bValidate = false;
-            
+            bValidate = false;   
         }
         if ((!expressionData.test(textSearch) || textSearch.length != 0) && (listSelection == null)) {
             bValidate = false;
-           
         }
-      
         if(!bValidate) {
-            alert("Vefirique la seleccion");
-           
+            alert("Vefirique la seleccion");           
         }else{
-    
             dataJson.bEmp_type_select = false;
             switch (listSelection) {
                 case 'sEmp_name':
@@ -349,22 +257,19 @@ function searchEmployee(e) {
                     break;   
             }
             _getList();
-
         }
-        
-
     }
-    
     e.preventDefault();
 }
 //Fuction search employeed delete 
 function searchEmployeeDelete(e) {
     let listSelection = $('#listSearchEmployeeDelete').val();
     let textSearch = $("#emp_search_delete").val();
-    let dataJson = new Object();
+    typeTatble = 1;
     let bValidate = true;
     if ((expressionData.test(textSearch) || textSearch.length == 0) && (listSelection == null)) {
-        alert("Vefirique la seleccion"); 
+        dataJson.bEmp_type_select = true;
+        _getList();
     } else {
         if ((expressionData.test(textSearch) || textSearch.length == 0) && (listSelection != null)) {
             bValidate = false;
@@ -375,33 +280,39 @@ function searchEmployeeDelete(e) {
         if (!bValidate) {
             alert("Vefirique la seleccion");
         } else {
-
+            dataJson.bEmp_type_select = false;
             switch (listSelection) {
                 case 'sEmp_name':
                     dataJson.sEmp_name = textSearch;
+
                     break;
                 case 'sEmp_surname':
                     dataJson.sEmp_surname = textSearch;
+
                     break;
                 case 'sEmp_document':
                     dataJson.sEmp_document = textSearch;
+
                     break;
                 case 'sEmp_mail':
                     dataJson.sEmp_mail = textSearch;
+
+                    break;
+                case 'sRol_name':
+                    dataJson.sEmp_mail = textSearch;
+
                     break;
             }
-            _getListEmployeeSelectDelete(dataJson);
+            _getList();
         }
-
     }
-
     e.preventDefault();
 }
 //Function delete employeed 
-function deleteEmployeed(id,e) {
+function deleteEmployeed(id) {
     let value = confirm("Esta seguro de realizar esta acción");
-
-    if (value) {
+    alert(id);
+    /*if (value) {
         dataJson.iEmp_id = id;
         debugger;
         $.ajax({
@@ -426,7 +337,48 @@ function deleteEmployeed(id,e) {
         });
     } else {
   
-    }
+    }*/
    
 }
+//Function create table list
+function createTable(data) {
+
+    var html = '';
+    if (typeTatble == 0) {
+        $.each(data, function (key, item) {
+            html += '<tr>';
+            html += '<td>' + item.sRol_name + '</td>';
+            html += '<td>' + item.sEmp_name + '</td>';
+            html += '<td>' + item.sEmp_surname + '</td>';
+            html += '<td>' + item.sEmp_document + '</td>';
+            html += '<td>' + item.sEmp_phone + '</td>';
+            html += '<td>' + item.sEmp_phone2 + '</td>';
+            html += '<td>' + item.sEmp_cell_phone + '</td>';
+            html += '<td>' + item.sEmp_cell_phone2 + '</td>';
+            html += '<td>' + item.sEmp_mail + '</td>';
+            html += '<td>' + item.sEmp_mail2 + '</td>';
+            html += '<td>' + item.sEmp_addres + '</td>';
+            html += '</tr>';
+        });
+        $('#listEmployee  tbody').html(html);
+
+    }
+    else if (typeTatble == 1) {
+        $.each(data, function (key, item) {
+            html += '<tr>';
+            html += '<td>' + item.sRol_name + '</td>';
+            html += '<td>' + item.sEmp_name + '</td>';
+            html += '<td>' + item.sEmp_surname + '</td>';
+            html += '<td>' + item.sEmp_document + '</td>';
+            html += '<td>' + item.sEmp_phone + '</td>';
+            html += '<td>' + item.sEmp_cell_phone + '</td>';
+            html += '<td>' + item.sEmp_mail + '</td>';
+            html += '<td><button class="btn-floating waves-effect waves-light red" type="button" name="action" onclick="deleteEmployeed(' + item.iEmp_id + ')"><i class="material-icons right">verified_user</i></button></td>';
+            html += '</tr>';
+        });
+        $('#listEmployeeDelete  tbody').html(html);
+
+    }
+}
+
 
