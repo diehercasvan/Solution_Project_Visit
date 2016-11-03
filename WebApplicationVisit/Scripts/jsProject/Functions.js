@@ -51,7 +51,6 @@ function redirection() {
     sessionStorage.removeItem("session");
  
 }
-
 //Function no back button 
 function nobackbutton() {
     window.location.hash = "no-back-button";
@@ -178,4 +177,115 @@ function disableEnableInput(dataForm, type) {
     fromPassword.prop('disabled', selectValidate);
     
 
+}
+//Function create table list
+function createTable(data) {
+
+    var html = '';
+    if (typeTatble == 0) {
+        $.each(data, function (key, item) {
+            html += '<tr>';
+            html += '<td>' + item.sRol_name + '</td>';
+            html += '<td>' + item.sEmp_name + '</td>';
+            html += '<td>' + item.sEmp_surname + '</td>';
+            html += '<td>' + item.sEmp_document + '</td>';
+            html += '<td>' + item.sEmp_phone + '</td>';
+            html += '<td>' + item.sEmp_phone2 + '</td>';
+            html += '<td>' + item.sEmp_cell_phone + '</td>';
+            html += '<td>' + item.sEmp_cell_phone2 + '</td>';
+            html += '<td>' + item.sEmp_mail + '</td>';
+            html += '<td>' + item.sEmp_mail2 + '</td>';
+            html += '<td>' + item.sEmp_addres + '</td>';
+            html += '</tr>';
+        });
+        $('#listEmployee  tbody').html(html);
+
+    }
+    else if (typeTatble == 1) {
+        $.each(data, function (key, item) {
+            html += '<tr>';
+            html += '<td>' + item.sRol_name + '</td>';
+            html += '<td>' + item.sEmp_name + '</td>';
+            html += '<td>' + item.sEmp_surname + '</td>';
+            html += '<td>' + item.sEmp_document + '</td>';
+            html += '<td>' + item.sEmp_phone + '</td>';
+            html += '<td>' + item.sEmp_cell_phone + '</td>';
+            html += '<td>' + item.sEmp_mail + '</td>';
+            html += '<td><button class="btn-floating waves-effect waves-light red" type="button" name="action" onclick="deleteEmployeed(' + item.iEmp_id + ')"><i class="material-icons right">verified_user</i></button></td>';
+            html += '</tr>';
+        });
+        $('#listEmployeeDelete  tbody').html(html);
+
+    }
+}
+
+//Function Validate email 
+function validateBoxEmail(input) {
+    let mail = input.val();
+    let validate = true;
+    if (!expressionEmail.test(mail)) {
+        validate = false;
+        input.addClass('invalid');
+    } else {
+        input.removeClass('invalid');
+    }
+    return validate;
+}
+//Function Validate text 
+function validateBoxText(inputs) {
+    let validate = true;
+    for (let i = 0; i < inputs.length; i++) {
+       
+        if ((expressionData.test(inputs[i].val())) || (inputs[i].val().length<=0)) {
+            inputs[i].addClass('invalid');
+            validate = false;
+        } else {
+            inputs[i].removeClass('invalid');
+        }
+    }
+    console.log(validate);
+    return validate;
+
+}
+//Function Validate password 
+function validateBoxPassword(input) {
+    let password = input.val();
+    let validate = true;
+    if (!expressionPassword.test(password)) {
+        validate = false;
+        input.addClass('invalid');
+    } else {
+        input.removeClass('invalid');
+    }
+    return validate;
+}
+//Function Validate password  confirm
+function validateBoxPasswordConfirm(input, input2) {
+    let password = input.val();
+    let password2 = input2.val();
+    let validate = true;
+    if (password != password2) {
+        validate = false;
+        input2.addClass('invalid');
+    } else {
+        input2.removeClass('invalid');
+    }
+    return validate;
+}
+//Function Validate select list
+function validateSelectList(lists) {
+
+    let validate = true;
+    for (let i = 0; i < lists.length; i++) {
+        if(lists[i].val()!="" || lists[i].val()!=null){
+            if (lists[i].val() ==null) {
+                validate = false;
+                lists[i].removeClass('invalid');
+            } else {
+                lists[i].addClass('invalid');
+            }
+        }
+    }
+
+    return validate;
 }

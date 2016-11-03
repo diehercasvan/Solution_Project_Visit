@@ -9,6 +9,7 @@ namespace Aplication_Visit.Controllers
     {
         public int iRol_id { get; set; }
         public int iPermission_id { get; set; }
+        public string sEmp_permission { get; set; }
         public int iEmp_id { get; set; }
         public string sRol_name { get; set; }
         public string sPermission_name { get; set; }
