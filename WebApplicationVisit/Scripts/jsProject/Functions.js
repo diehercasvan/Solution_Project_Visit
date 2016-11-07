@@ -107,7 +107,7 @@ function StorageLogin(data) {
 }
 //Function clear input 
 function clearInput(get_from) {
-   
+
     //Type input 
     let fromInput = $(get_from + ' form :input');
     fromInput.val("");
@@ -137,13 +137,11 @@ function clearInput(get_from) {
     fromLabel.removeClass('active');
     //Type i
     let fromI = $(get_from + ' form i');
-    fromI.removeClass('active');
-
-
-  
+    fromI.removeClass('active'); 
 }
 //Function clear input 
 function disableEnableInput(dataForm, type) {
+   
     let get_from = '#form' + dataForm;
     let selectValidate = true;
     if(type!=0){
@@ -176,7 +174,55 @@ function disableEnableInput(dataForm, type) {
     let fromPassword = $(get_from + ' form :input[type=password]');
     fromPassword.prop('disabled', selectValidate);
     
+    
 
+}
+//Function clear elements input form  
+function disableEnableElementInput(dataForm, type) {
+
+    let get_from = dataForm;
+
+    let selectValidate = true;
+    if (type != 0) {
+        selectValidate = false;
+    }
+    else {
+        selectValidate = true;
+    }
+    //Type input 
+    let fromInput = $(get_from + ' :input');
+    fromInput.prop('disabled', selectValidate);
+
+    //Type text 
+    let fromtext = $(get_from + ' :input[type=text]');
+    fromtext.prop('disabled', selectValidate);
+
+    //Type tel     
+    let fromTel = $(get_from + '  :input[type=tel]');
+    fromTel.prop('disabled', selectValidate);
+
+    //Type number
+    let fromNumber = $(get_from + '  :input[type=number]');
+    fromNumber.prop('disabled', selectValidate);
+
+    //Type email
+    let fromMail = $(get_from + '  :input[type=email]');
+    fromMail.prop('disabled', selectValidate);
+
+    //Type password
+    let fromPassword = $(get_from + '  :input[type=password]');
+    fromPassword.prop('disabled', selectValidate);
+
+
+
+}
+
+
+//Fuction clear table 
+function cleanTable(table) {
+    var html = '';
+    
+        $('#'+table+'  tbody').html(html);
 }
 //Function create table list
 function createTable(data) {
@@ -211,11 +257,51 @@ function createTable(data) {
             html += '<td>' + item.sEmp_phone + '</td>';
             html += '<td>' + item.sEmp_cell_phone + '</td>';
             html += '<td>' + item.sEmp_mail + '</td>';
-            html += '<td><button class="btn-floating waves-effect waves-light red" type="button" name="action" onclick="deleteEmployeed(' + item.iEmp_id + ')"><i class="material-icons right">verified_user</i></button></td>';
+            html += '<td><button class="btn-floating waves-effect waves-light red" type="button" name="action" onclick="deleteEmployeed(' + item.iEmp_id + ',event)"><i class="material-icons right">verified_user</i></button></td>';
             html += '</tr>';
         });
         $('#listEmployeeDelete  tbody').html(html);
 
+    }
+    else if (typeTatble == 2) {
+        let listInput = new Array();
+        listInput[0] = $('#emp_name').prop('disabled', false);
+        listInput[1] = $('#emp_surname').prop('disabled', false);
+        listInput[2] = $('#emp_address').prop('disabled', false);
+        listInput[3] = $('#emp_document');
+        listInput[4] = $('#emp_phone').prop('disabled', false);
+        listInput[5] = $('#emp_phone2').prop('disabled', false);
+        listInput[6] = $('#emp_cel_phone').prop('disabled', false);
+        listInput[7] = $('#emp_cel_phone2').prop('disabled', false);
+        listInput[8] = $('#emp_mail');
+        listInput[9] = $('#emp_mail2').prop('disabled', false);
+        listInput[10] = $('#emp_password').prop('disabled', false);
+        listInput[11] = $('#emp_password_confirm').prop('disabled', false);
+        $(".select-wrapper :input[type=text]").prop('disabled', false);
+        $("#btnUpdateInsert").prop('disabled', false);
+        $(".input-field :input[type=text]").prop('disabled', false);
+        $(".input-field :input[type=file]").prop('disabled', false);
+        
+        listInput[0].val(data[0].sEmp_name);
+        listInput[1].val(data[0].sEmp_surname);
+        listInput[2].val(data[0].sEmp_addres);
+        listInput[3].val(data[0].sEmp_document);
+        listInput[4].val(data[0].sEmp_phone);
+        listInput[5].val(data[0].sEmp_phone2);
+        listInput[6].val(data[0].sEmp_cell_phone);
+        listInput[7].val(data[0].sEmp_cell_phone2);
+        listInput[8].val(data[0].sEmp_mail);
+        listInput[9].val(data[0].sEmp_mail2);
+        listInput[10].val(data[0].sEmp_password);
+        listInput[11].val(data[0].sEmp_password);
+        //Type label
+        let fromLabel = $("#form" + fromUpdateInsert + ' form label');
+        fromLabel.addClass('active');
+        //Type i
+        let fromI = $(fromUpdateInsert + ' form i');
+        fromI.addClass('active');
+        
+       
     }
 }
 
@@ -223,6 +309,7 @@ function createTable(data) {
 function validateBoxEmail(input) {
     let mail = input.val();
     let validate = true;
+    input.removeClass('invalid');
     if (!expressionEmail.test(mail)) {
         validate = false;
         input.addClass('invalid');
@@ -243,7 +330,7 @@ function validateBoxText(inputs) {
             inputs[i].removeClass('invalid');
         }
     }
-    console.log(validate);
+
     return validate;
 
 }
@@ -280,10 +367,8 @@ function validateSelectList(lists) {
         if(lists[i].val()!="" || lists[i].val()!=null){
             if (lists[i].val() ==null) {
                 validate = false;
-                lists[i].removeClass('invalid');
-            } else {
-                lists[i].addClass('invalid');
-            }
+               
+            } 
         }
     }
 

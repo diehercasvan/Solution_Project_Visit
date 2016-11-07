@@ -17,12 +17,11 @@ namespace DAL
         public EMPLOYEE()
         {
             this.BRANCH_OFFICE = new HashSet<BRANCH_OFFICE>();
-            this.USES = new HashSet<USES>();
         }
     
         public int EMP_ID { get; set; }
-        public Nullable<int> ROL_ID { get; set; }
-        public Nullable<int> BRA_BUIS_ID { get; set; }
+        public int ROL_ID { get; set; }
+        public int BRA_BUIS_ID { get; set; }
         public string EMP_DOCUMENT { get; set; }
         public string EMP_NAME { get; set; }
         public string EMP_SURNAME { get; set; }
@@ -35,11 +34,11 @@ namespace DAL
         public string EMP_MAIL2 { get; set; }
         public string EMP_PASSWORD { get; set; }
         public bool EMP_STATE { get; set; }
+        public string EMP_PER { get; set; }
         public string EMP_PHOTO { get; set; }
     
         public virtual BRANCH_COMPANY BRANCH_COMPANY { get; set; }
         public virtual ICollection<BRANCH_OFFICE> BRANCH_OFFICE { get; set; }
         public virtual ROLE ROLE { get; set; }
-        public virtual ICollection<USES> USES { get; set; }
     }
 }

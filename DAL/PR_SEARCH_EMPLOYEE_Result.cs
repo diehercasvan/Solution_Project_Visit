@@ -25,7 +25,9 @@ namespace DAL
         public string EMP_MAIL2 { get; set; }
         public string EMP_ADDRES { get; set; }
         public string EMP_PHOTO { get; set; }
+        public string EMP_PASSWORD { get; set; }
         public int ROL_ID { get; set; }
         public string ROL_NAME { get; set; }
+        public string EMP_PER { get; set; }
     }
 }

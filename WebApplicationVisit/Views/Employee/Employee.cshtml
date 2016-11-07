@@ -176,7 +176,10 @@
             <!--Start Container Form -->
             <div class="col s12 m12 l10">
                 <h4 id="titleForm">Empleado</h4><!--Dinamic Title-->
-
+                <div class="row">
+                    <p id="textInfoForm"></p>
+                </div>
+                <!--End text info  -->
                 <!--Start Container Form 0-->
                 <div id="form0_0" class="form_select">
                     <!--The onSubmit is responsible for executing the function to validate the text boxes correctly before sending data-->
@@ -252,40 +255,48 @@
                 <div id="form0_1" class="form_select">
                     <!--Start cont search-->
                     <div class="row cont_search" id="cont_search_0_1">
-                        <!--Start Elements -->
-                        <div class="input-field col s12 m3 l3" >
-                            <select>
-                               
-                            </select>
-                            <label>Materialize Select</label>
-                        </div>
-                        <!--End Elements -->
+                        <!--Form search-->
+                        <form class="col s12  m12 l12" id="form_search_0_1" onsubmit="UpdateSearchEmployee(event, '0_1')">
+                            <!-- Start Elements inputto remember: Elements unique with id of Button and input-->
+                            <div class="row">
+                                <!--Start Elements -->
+                                <div class="input-field col s12 m3 l3">
+                                    <select id="listSearchEmployeeUpdate">
+                                        <option value="" disabled selected required>Elija su opción</option>                             
+                                        <option value="sEmp_document">Documento</option>
+                                        <option value="sEmp_mail">Email</option>
+                                    </select>
+                                    <label>Seleccine Búsqueda</label>
+                                </div>
+                                <!--End Elements -->
+                                <!--Start Elements -->
+                                <div class="input-field col s10 m7 l7">
+                                    <input id="emp_search_update" type="text" class="validate" required>
+                                    <label for="emp_search_update">Digite el dato a buscar</label>
+                                </div>
+                                <!--End Elements -->
+                                <!--Start Elements -->
+                                <div class="input-field col s2 m2 l2">
+                                    <div class="card-action center">
+                                        <button id="btn_emp_search" class="btn-floating waves-effect waves-light" type="submit" name="action">
+                                            <i class="material-icons right">search</i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--End Elements -->
 
-                        <!--Start Elements -->
-                        <div class="input-field col s10 m7 l7">
-                            <input id="emp_search" type="text" class="validate" required>
-                            <label for="emp_search">Digite el valor a buscar</label>
-                        </div>
-                        <!--End Elements -->
-                        <!--Start Elements -->
-                        <div class="input-field col s2 m2 l2">
-                            <div class="card-action center">
-                                <button id="btn_emp_search" class="btn-floating waves-effect waves-light" type="submit" name="action">
-                                    <i class="material-icons right">search</i>
-                                </button>
                             </div>
-                        </div>
-                        <!--End Elements -->
+                            <!-- End Elements input-->
+                        </form>
+                        <!--End Form search-->
+                     
                     </div>
                     <!--End cont search-->
 
                     <!--The onSubmit is responsible for executing the function to validate the text boxes correctly before sending data-->
-                    <form class="col s12  m12 l12" id="formCreateUpdate" >
+                    <form class="col s12  m12 l12" id="formCreateUpdate" onsubmit="validateTextBox(event)" >
                         <!--Start text info  -->
-                         <div class="row">
-                             <p id="textInfoForm"></p>
-                        </div>
-                        <!--End text info  -->
+                         
                             <!-- Start Elements inputto remember: Elements unique with id of Button and input-->
                             <div class="row">
                                 <!--Start Elements -->
@@ -307,6 +318,13 @@
                                     <i class="material-icons prefix">perm_identity</i>
                                     <input id="emp_document" type="text" class="validate" required>
                                     <label for="emp_document">Documento</label>
+                                </div>
+                                <!--End Elements -->
+                                <!--Start Elements -->
+                                <div class="input-field col s12 m6 l4">
+                                    <i class="material-icons prefix">room</i>
+                                    <input id="emp_address" type="text" class="validate" required>
+                                    <label for="emp_address">Direccion</label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
@@ -351,13 +369,7 @@
                                     <label for="emp_mail2">Email 2</label>
                                 </div>
                                 <!--End Elements -->
-                                <!--Start Elements -->
-                                <div class="input-field col s12 m6 l4">
-                                    <i class="material-icons prefix">room</i>
-                                    <input id="emp_address" type="text" class="validate" required>
-                                    <label for="emp_address">Direccion</label>
-                                </div>
-                                <!--End Elements -->
+                                
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">lock</i>
@@ -375,11 +387,7 @@
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l3">
                                     <select id="listRole">
-                                        <option value="" disabled selected>Elija su opción</option>
-                                        <option value="0" selected>Crear</option>
-                                        <option value="1">Modificar</option>
-                                        <option value="2">Eliminar</option>
-                                        <option value="3">Buscar</option>
+                                  
                                     </select>
                                     <label>Seleccionar Rol</label>
                                 </div>
@@ -399,11 +407,7 @@
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l3">
                                     <select id="listBraBusiness">
-                                        <option value="" disabled selected>Elija su opción</option>
-                                        <option value="0">Crear</option>
-                                        <option value="1">Modificar</option>
-                                        <option value="2">Eliminar</option>
-                                        <option value="3">Buscar</option>
+                                    
                                     </select>
                                     <label>Seleccionar Sucursal Empresa</label>
                                 </div>
@@ -430,7 +434,7 @@
                             <div class="row">
                                 <div class="col s12 m12 l12">
                                     <div class="card-action center">
-                                        <button id="login" class="btn waves-effect waves-light" onclick="validateTextBox(event)" type="button" name="action">
+                                        <button id="btnUpdateInsert" class="btn waves-effect waves-light" type="submit" name="action">
                                             Enviar
                                             <i class="material-icons right">done</i>
                                         </button>
@@ -438,7 +442,7 @@
                                 </div>
                             </div>
                             <!--End Elements Button-->
-</form>
+                        </form>
                 </div>
                 <!--End Form 1-->
 
@@ -453,11 +457,8 @@
                             <div class="input-field col s12 m3 l3">
                                 <select id="listSearchEmployeeDelete">
                                     <option value="" disabled selected>Elija su opción</option>
-                                    <option value="sEmp_name">Nombre</option>
-                                    <option value="sEmp_surname">Apellido</option>
                                     <option value="sEmp_document">Documento</option>
                                     <option value="sEmp_mail">Email</option>
-                                    <option value="sRol_name">Rol</option>
                                 </select>
                                 <label>Seleccine Búsqueda</label>
                             </div>
@@ -482,6 +483,7 @@
                         <!-- End Elements input-->
                     </form>
                     <!--Start Table result search-->
+
                     <div class="row">
                         <!--Start Table-->
                         <div class="col s12 m12 l12" id="listEmployeeDelete">

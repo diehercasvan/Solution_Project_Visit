@@ -19,8 +19,10 @@ namespace Aplication_Visit.Controllers
         {
             return View();
         }
-        public JsonResult ListUserSelect(DtoEmployee emp) {
-            return Json(contEmployee.listEmployeeSelect(emp),JsonRequestBehavior.AllowGet);
+        public JsonResult ListEmployeeUpdate(DtoEmployee emp)
+        {
+           
+            return Json(contEmployee.ListEmployeeUpdate(emp), JsonRequestBehavior.AllowGet);
         }
         public JsonResult ListEmployee(DtoEmployee emp)
         {
@@ -35,17 +37,18 @@ namespace Aplication_Visit.Controllers
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ListUserSelectRole()
+        public JsonResult EmployeeInsertUpdate(DtoEmployee emp)
         {
-            return Json(contEmployee.listRoleEmployee(), JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult ListUserSelectPermission()
-        {
-            return Json(contEmployee.listPermissionEmployee(), JsonRequestBehavior.AllowGet);
+            return Json(contEmployee.InsertUpdateEmployee(emp), JsonRequestBehavior.AllowGet);
         }
         public JsonResult EmployeeDelete(DtoEmployee emp)
         {
-            return Json(contEmployee.deleteEmployee(emp), JsonRequestBehavior.AllowGet);
+            return Json(contEmployee.DeleteEmployee(emp), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ListRole() {
+
+            return Json(contEmployee.ListRole(),JsonRequestBehavior.AllowGet);
         }
     }
 }

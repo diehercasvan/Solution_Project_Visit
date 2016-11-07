@@ -9,9 +9,15 @@ var sNameTitle = "";
 var oObjectUser;
 var dataJson= new Object();
 var typeTatble = 0;
+var typeSelectionUpdateCreate = "";
+var textInfoForm;
+var fromUpdateInsert;
+var fromUpdateSearch;
 //Start DOM html jQuery
 $(document).ready(function () {
 
+    textInfoForm = $('#textInfoForm');
+    textInfoForm.css('color', 'red');
     $('.button-collapse').sideNav();
     selectionItem("item_0");
     $('.modal-trigger').leanModal();
@@ -19,13 +25,16 @@ $(document).ready(function () {
     //validateSession(document.URL);
     //Load list
     $('select').material_select();
+    $('#listSearchEmployeeUpdate').material_select();
+    
     dataJson.bemp_state = true;
     dataJson.iBra_buis_id = 1;
     dataJson.bEmp_type_select = true;
     typeTatble = 0;
-   // _getList(0);
-    //_getListRol();
-    //_getListPermission();
+    _getList();
+    _getListRol();
+    _getListBraBusiness();
+    
     
 });
 
@@ -43,7 +52,7 @@ function selectionItem(item) {
 function selectionSubItems(subItem, Form, cont_search) {
 
     let items = "#" + subItem + "";
-
+    fromUpdateSearch = "#form_search_" + Form;
     $('.collection-item').css("background-color", "#fff");
     $('.collection-item').css("color", "#26a69a");
     $(items).css("background-color", "#26a69a");
@@ -54,13 +63,17 @@ function selectionSubItems(subItem, Form, cont_search) {
 
     if (cont_search) {
         $('#cont_search_' + Form).css("display", "block");
-        disableEnableInput(Form, 0)
+        disableEnableInput(Form, 0);
+        disableEnableElementInput(fromUpdateSearch, 1);
+     
     } else {
         $('#cont_search_' + Form).css("display", "none");
-        disableEnableInput(Form, 1)
+        disableEnableInput(Form, 1);
+        disableEnableElementInput(fromUpdateSearch, 0);
     }
     selectForm(Form);
 
+    typeSelectionUpdateCreate = subItem.substring(subItem.indexOf("_") + 1, subItem.length);
 
 }
 //Function select Item mobile
@@ -79,7 +92,7 @@ function selectionMitem(item) {
 function selectionMsubItems(subItem, Form, cont_search, nav_mobile) {
 
     let items = "#" + subItem+"";
-
+    fromUpdateSearch = "#form_search_" + Form;
     $('.collection-item').css("background-color", "#fff");
     $('.collection-item').css("color", "#26a69a");
 
@@ -96,12 +109,19 @@ function selectionMsubItems(subItem, Form, cont_search, nav_mobile) {
     
     if (cont_search) {
         $('#cont_search_' + Form).css("display", "block");
-        disableEnableInput(Form, 0)
+   
+        disableEnableInput(Form, 0);
+        disableEnableElementInput(fromUpdateSearch, 1);
+        
     } else {
         $('#cont_search_' + Form).css("display", "none");
-        disableEnableInput(Form, 1)
+        disableEnableInput(Form, 1);
+        disableEnableElementInput(fromUpdateSearch, 0);
     }
+
     selectForm(Form);
+    typeSelectionUpdateCreate = subItem.substring(subItem.indexOf("_") + 1, subItem.length);
+ 
 
 }
 //Function select form  
@@ -110,21 +130,104 @@ function selectForm(dataForm) {
     let form = '#form' + dataForm;
     $(form).fadeIn("slow");
     clearInput(form);
+    textInfoForm.text("");
+    fromUpdateInsert = form;
 }
+
 //Function validate create
-//Load data of form
-function validateCreate(e) {
+function createEmployee(data) {
+    debugger;
+    $.ajax({
+        url: "Employee/EmployeeInsertUpdate",
+        cache: false,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        data: data,
+        dataType: "json",
+        success: function (result) {
+            if (result == true) {
+                textInfoForm.text("Accion realizada con exito");
+                clearInput(fromUpdateInsert);
+                console.log(fromUpdateInsert);
+                //textInfoForm.text("");
+            }
+            else {
+                textInfoForm.text("Se presento un inconveniente en el  proceso");
+            }
+           
+          
+        },
+        error: function (errorMessage) {
+        alert(errorMessage.responseText);
+    }
+    });
+}
+//Function validate Update
+function UpdateEmployee(data) {
+    debugger;
+    $.ajax({
+        url: "Employee/EmployeeInsertUpdate",
+        cache: false,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        data: data,
+        dataType: "json",
+        success: function (result) {
+            if (result == true) {
+                textInfoForm.text("Accion realizada con exito");
+                console.log(fromUpdateInsert);
+                clearInput("#form" + fromUpdateInsert);
+                disableEnableInput(fromUpdateInsert, 0);
+                disableEnableElementInput(fromUpdateSearch, 1);
+       
+            }
+            else {
+                textInfoForm.text("Se presento un inconveniente en el  proceso");
+            }
 
-    //Get data input text 
 
-    e.preventDefault();//not reload page
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
 }
 //Load data of form
-function validateUpdate(e) {
+function UpdateSearchEmployee(e,form) {
+    let list = $("#listSearchEmployeeUpdate").val();
+    let textSearch = $("#emp_search_update").val();
+    let bValidate = true;
+    fromUpdateInsert = form;
 
-    //Get data input text 
+    typeTatble = 2;
+    if (list == null ) {
+        textInfoForm.text("Verifique la lista de busqueda");
+        bValidate = false;
+    } 
+    else if (expressionData.test(textSearch) || textSearch.length == 0) {
+        textInfoForm.text("Verifique la caja de busqueda");
+        bValidate = false;
+    }
+    if(bValidate){
+        textInfoForm.text("");
+        dataJson.bEmp_type_select = false;
+        switch (list) {
+       
+            case 'sEmp_document':
+                dataJson.sEmp_document = textSearch;
 
-    e.preventDefault();//not reload page
+                break;
+            case 'sEmp_mail':
+                dataJson.sEmp_mail = textSearch;
+
+                break;
+                
+        }
+        _getEmployee();
+    }
+
+        
+    e.preventDefault();
 }
 //Load data of form
 function validateDelete(e) {
@@ -143,91 +246,82 @@ function validateSearch(e) {
 //Function  validate text box
 function validateTextBox(e) {
 
+
     let bValidate = true;
+    let bValidateMail = false;
     let listTextBox = new Array();
     let listSelect = new Array();
-    let textInfoForm = $('#textInfoForm');
-    textInfoForm.css('color', 'red');
+    
+   
     listTextBox[0] = $('#emp_name');
     listTextBox[1] = $('#emp_surname');
     listTextBox[2] = $('#emp_address');
     listTextBox[3] = $('#emp_document');
 
     let sMail = $('#emp_mail');
-    let sMail2 = $('#emp_mail2');
+    let sMail_2 = $('#emp_mail2');
 
     let sPassword = $('#emp_password');
     let sPassword2 = $('#emp_password_confirm');
 
+
+
     listSelect[0] = $('#listPermission');
     listSelect[1] = $('#listBraBusiness');
     listSelect[2] = $('#listRole');
+    $('input').removeClass('invalid');
 
-
-
-    if ((!validateBoxText(listTextBox)) ) {
-        bValidate = false;
+    if (!validateBoxText(listTextBox) ) {
+        
         textInfoForm.text("Verifique los datos de los contenidos");
-    } else if(!validateBoxEmail(sMail)) {
+        return false;
+    }
+    if (!validateBoxEmail(sMail)) {
+        textInfoForm.text("Verifique los datos de su cuenta de correo mail 1");
+        return false;
+    } else {
 
-        textInfoForm.text("Verifique los datos de su cuenta de correo");
-        bValidate = false
+
+        if (sMail_2.val().toLowerCase() === sMail.val().toLowerCase()) {
+            textInfoForm.text("Los email deben ser diferentes");
+            sMail_2.addClass('invalid');
+            sMail.addClass('invalid');
+            return false;
+        }
+        else if (sMail_2.val() != "" || sMail_2.val().length > 0) {
+
+            let bValidateMail = (expressionEmail.test(sMail_2.val().toLowerCase())) ? false : true;
+
+            if (bValidateMail) {
+                sMail_2.addClass('invalid');
+                textInfoForm.text("Verifique los datos de su cuenta de correo mail 2");
+                return false;
+            } 
+        }
     }
-    else if (sMail2.val().toLowerCase() === sMail.val().toLowerCase()) {
-        textInfoForm.text("Los email deben ser diferentes");
-        sMail2.addClass('invalid');
-        sMail.addClass('invalid');
-        bValidate = false;
-    }
-    else if(!validateBoxPassword(sPassword)) {
+
+   if (!validateBoxPassword(sPassword)) {
            textInfoForm.text('Tenga en cuenta :Mínimo 8 caracteres, máximo 15, al menos una letra mayúscula, al menos una letra minúscula, al menos un carácter, no espacios en blanco.');
-           bValidate = false;
+           return false;
    } else if(!validateBoxPasswordConfirm(sPassword, sPassword2)){
             textInfoForm.text("Las constraseñas no coinciden ");
-                bValidate = false;
+            return false;
        
-    }else if (!validateSelectList(listSelect)) {
+   }
+   if (!validateSelectList(listSelect)) {
                 textInfoForm.text("Seleccione una opción de las listas");
-                    bValidate = false;
-        } else {
-            if (sMail2.val().toLowerCase().length > 1 || sMail2.val().toLowerCase() != "") {
-                if (!validateBoxEmail(sMail2)) {
-                    textInfoForm.text("Verifique los datos de su cuenta de correo");
-                    bValidate = false
-                }
-                
-            }
-            if ((listSelect[0].val().length < 1) || (!bValidate)) {
-                textInfoForm.text("Seleccione una opción de las listas");
-                bValidate = false;
-            } else {
-                textInfoForm.text("");
-                $('input').removeClass('invalid');
-            }
-           
-                        /* sMail.removeClass('invalid');
-                         sMail2.removeClass('invalid');
-                         if (sMail2.val().length <= 0) {
-                             textInfoForm.text("Verifique los datos de los contenidos");
-                             bValidate = false;
-                         } else {
-                             if (!validateBoxEmail(sMail2)) {
-                                 textInfoForm.text("Verifique los datos de su cuenta de correo");
-                                 bValidate = false;
-                             } else {
-                                 textInfoForm.text("");
-                             }
-                         }
-                        */
-                       
-    }
+                return false;
     
-                        
-                
+    }else if (listSelect[0].val().length < 1) {
+        textInfoForm.text("Seleccione una opción de las listas");
+        return false;
+    } 
    
 
     if (bValidate) {
-        
+
+            textInfoForm.text("");
+            $('input').removeClass('invalid');
             dataJson.iRol_id = parseInt(listSelect[2].val());
             dataJson.sEmp_name = listTextBox[0].val().toLowerCase();
             dataJson.sEmp_document = listTextBox[3].val().toLowerCase();
@@ -238,24 +332,45 @@ function validateTextBox(e) {
             dataJson.sEmp_cell_phone2 = $('#emp_cel_phone2').val();
             dataJson.sEmp_addres = listTextBox[2].val().toLowerCase();
             dataJson.sEmp_mail = sMail.val().toLowerCase();
-            dataJson.sEmp_mail2 = sMail2.val().toLowerCase();
+            dataJson.sEmp_mail2 = sMail_2.val().toLowerCase();
             dataJson.sEmp_password = sPassword.val();
             dataJson.sEmp_photo = $('#emp_photo').val().toLowerCase();
-            dataJson.sEmp_permission = listSelect[0].val();
+            dataJson.sEmp_permission = listSelect[0].val().toString();
             dataJson.iBra_buis_id = parseInt(listSelect[1].val());
-            console.log(dataJson);
-
+           
+            selectionStorages();
+            return false;
     }
     else {
         alert("Valida la información");
+        return false;
+
 
     }
-
     e.preventDefault();
-    return false;
+    
 }
 
+//function  menu selection 
+function selectionStorages() {
+    debugger;
+    switch (typeSelectionUpdateCreate) {
+        case '0_0':
+           
+            break;
+        case '0_1':
+            createEmployee(dataJson);
+            break;
+        case '0_2':
+            UpdateEmployee(dataJson);
+            break;
+        case '0_3':
 
+            break;
+    }
+    console.log(typeSelectionUpdateCreate);
+    
+}
 
 //Function database 
 //Function get list user  
@@ -276,11 +391,41 @@ function _getList() {
         }
     });
 }
+//Function get list user  
+function _getEmployee() {
+ 
+    $.ajax({
+        url: "/Employee/ListEmployeeUpdate",
+        cache: false,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        data: dataJson,
+        dataType: "json",
+        success: function (result) {
+   
+            if (result.length > 0) {
+                createTable(result);
+
+            } else {
+ 
+                clearInput("#form"+fromUpdateInsert);
+                disableEnableInput(fromUpdateInsert, 0);
+                disableEnableElementInput(fromUpdateSearch, 1);
+                alert("No se encontraron datos");
+            }
+        },
+        error: function (errorMessage) {
+           // alert(errorMessage.responseText);
+            
+            alert("Se presento un inconveniente en  la comunicación ");
+        }
+    });
+}
 //Function get role
 function _getListRol() {
     //debugger;
     $.ajax({
-        url: "/Employee/ListUserSelectRole",
+        url: "/Employee/ListRole",
         cache: false,
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -289,7 +434,7 @@ function _getListRol() {
             let select = $('#listRole');
             select.append('<option value="" disabled selected>Elija su opción</option>');
             $.each(result, function (val, item) {
-                select.append('<option value="' + val + '">' + item.sRol_name + '</option>');
+                select.append('<option value="' + item.iRol_id + '">' + item.sRol_name + '</option>');
             });
             select.material_select();
         },
@@ -298,20 +443,23 @@ function _getListRol() {
         }
     });
 }
-//Function get Permission 
-function _getListPermission() {
-    //debugger;
+//Function get role
+function _getListBraBusiness() {
+    
+    let obj = new Object();
+    obj.iBus_id = 1;
     $.ajax({
-        url: "/Employee/ListUserSelectPermission",
+        url: "/Business/ListBraBusiness",
         cache: false,
         type: "GET",
         contentType: "application/json; charset=utf-8",
+        data: obj,
         dataType: "json",
         success: function (result) {
-            let select = $('#listPermission');
+            let select = $('#listBraBusiness');
             select.append('<option value="" disabled selected>Elija su opción</option>');
             $.each(result, function (val, item) {
-                select.append('<option value="' + val + '">' + item.sPermission_name + '</option>');
+                select.append('<option value="' + item.iBra_buis_id + '">' + item.sBra_buis_name + '</option>');
             });
             select.material_select();
         },
@@ -320,6 +468,7 @@ function _getListPermission() {
         }
     });
 }
+
 //Function  search employee
 function searchEmployee(e) {
     
@@ -376,29 +525,20 @@ function searchEmployeeDelete(e) {
     let textSearch = $("#emp_search_delete").val();
     typeTatble = 1;
     let bValidate = true;
-    if ((expressionData.test(textSearch) || textSearch.length == 0) && (listSelection == null)) {
-        dataJson.bEmp_type_select = true;
-        _getList();
-    } else {
-        if ((expressionData.test(textSearch) || textSearch.length == 0) && (listSelection != null)) {
-            bValidate = false;
-        }
-        if ((!expressionData.test(textSearch) || textSearch.length != 0) && (listSelection == null)) {
-            bValidate = false;
-        }
-        if (!bValidate) {
-            alert("Vefirique la seleccion");
-        } else {
+    if (listSelection == null) {
+        textInfoForm.text("Verifique la lista de busqueda");
+        bValidate = false;
+    }
+    else if (expressionData.test(textSearch) || textSearch.length == 0) {
+        textInfoForm.text("Verifique la caja de busqueda");
+        bValidate = false;
+    }
+
+
+        if (bValidate)  {
             dataJson.bEmp_type_select = false;
             switch (listSelection) {
-                case 'sEmp_name':
-                    dataJson.sEmp_name = textSearch;
-
-                    break;
-                case 'sEmp_surname':
-                    dataJson.sEmp_surname = textSearch;
-
-                    break;
+              
                 case 'sEmp_document':
                     dataJson.sEmp_document = textSearch;
 
@@ -407,23 +547,20 @@ function searchEmployeeDelete(e) {
                     dataJson.sEmp_mail = textSearch;
 
                     break;
-                case 'sRol_name':
-                    dataJson.sEmp_mail = textSearch;
-
-                    break;
             }
             _getList();
         }
+        e.preventDefault();
     }
-    e.preventDefault();
-}
+ 
+
 //Function delete employeed 
-function deleteEmployeed(id) {
+function deleteEmployeed(id,e) {
     let value = confirm("Esta seguro de realizar esta acción");
-    alert(id);
-    /*if (value) {
-        dataJson.iEmp_id = id;
-        debugger;
+    debugger;
+    dataJson.iEmp_id = id;
+    console.log(dataJson);
+    if (value) {
         $.ajax({
             url: "/Employee/EmployeeDelete",
             cache: false,
@@ -433,8 +570,9 @@ function deleteEmployeed(id) {
             dataType: "json",
             success: function (result) {
                 console.log(result);
-                if (result) {
-                    searchEmployeeDelete(e);
+                if (result==true) {
+                    alert("Empleado eliminado con exito");
+                    cleanTable("listEmployeeDelete");
                 }
                 else {
                     alert("Se presento un error al realizar esta  acción");
@@ -445,8 +583,8 @@ function deleteEmployeed(id) {
             }
         });
     } else {
-  
-    }*/
+        
+    }
    
 }
 
