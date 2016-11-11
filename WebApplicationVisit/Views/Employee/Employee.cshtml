@@ -29,11 +29,17 @@
         input{
           text-transform: uppercase;
         }
+        #contIdBusiness {
+              display:none;
+        }
+        
+
 
  
     </style>
 </head>
 <body onload="nobackbutton()">
+
     <!--Start Nav bar -->
     <nav class="light-blue lighten-1" role="navigation">
         <!--Start Container nav bar-->
@@ -62,7 +68,6 @@
                                     <div class="collapsible-body">
                                         <!--Start  Items-->
                                         <div class="collection">
-                                            
                                             <a href="#!" class="collection-item active per_user_3" onclick="selectionMsubItems(this.id, '0_0', false, true)" id="mSubItem_0_0">Buscar</a>
                                             <a href="#!" class="collection-item per_user_0" onclick="selectionMsubItems(this.id, '0_1', false, true)" id="mSubItem_0_1">Crear</a>
                                             <a href="#!" class="collection-item per_user_1" onclick="selectionMsubItems(this.id, '0_1', true, true)" id="mSubItem_0_2">Modificar</a>
@@ -77,16 +82,16 @@
                                 <!--Start items menu mobile-->
                                 <li class="z-depth-1">
                                     <!--Header Info List-->
-                                    <div class="collapsible-header activeItem" onclick="selectionMitem(this.id)" id="mItem_1" title="Empleado"><h6 class="right-align">Empleado</h6></div>
+                                    <div class="collapsible-header activeItem" onclick="selectionMitem(this.id)" id="mItem_1" title="Rol"><h6 class="right-align">Rol</h6></div>
                                     <!--Start Body Info List Selection Items-->
                                     <div class="collapsible-body">
                                         <!--Start  Items-->
                                         <div class="collection">
 
-                                            <a href="#!" class="collection-item active per_user_3" onclick="selectionMsubItems(this.id, '0_0', false, true)" id="mSubItem_0_0">Buscar</a>
-                                            <a href="#!" class="collection-item per_user_0" onclick="selectionMsubItems(this.id, '0_1', false, true)" id="mSubItem_0_1">Crear</a>
-                                            <a href="#!" class="collection-item per_user_1" onclick="selectionMsubItems(this.id, '0_1', false, true)" id="mSubItem_0_2">Modificar</a>
-                                            <a href="#!" class="collection-item per_user_2" onclick="selectionMsubItems(this.id, '0_3', false, true)" id="mSubItem_0_3">Eliminar</a>
+                                            <a href="#!" class="collection-item active per_user_3" onclick="selectionMsubItems(this.id, '1_0', false, true)" id="mSubItem_1_0">Buscar</a>
+                                            <a href="#!" class="collection-item per_user_0" onclick="selectionMsubItems(this.id, '1_1', false, true)" id="mSubItem_1_1">Crear</a>
+                                            <a href="#!" class="collection-item per_user_1" onclick="selectionMsubItems(this.id, '1_1', false, true)" id="mSubItem_1_2">Modificar</a>
+                                            <a href="#!" class="collection-item per_user_2" onclick="selectionMsubItems(this.id, '1_3', false, true)" id="mSubItem_1_3">Eliminar</a>
                                         </div>
                                         <!--End  Items-->
                                     </div>
@@ -121,6 +126,9 @@
 
     <!--Start Container-->
         <div class="row">
+            <!--Start data -->
+                <div id="contIdBusiness"><input type="text" id="iEmp_id" value=1><input type="text" id="bemp_state" value="true"></div>
+            <!---->
             <!--Start Menu Side-->
             <div class="col l2 hide-on-small-only hide-on-med-only">
                 <ul>
@@ -137,9 +145,9 @@
                                     <!--Start  Items-->
                                     <div class="collection">
                                         <a href="#!" class="collection-item active per_user_3" onclick="selectionSubItems(this.id, '0_0', false)" id="subItem_0_0">Buscar</a>
-                                        <a href="#!" class="collection-item per_user_1" onclick="selectionSubItems(this.id, '0_1', false)" id="subItem_0_1">Crear </a>
-                                        <a href="#!" class="collection-item per_user_2" onclick="selectionSubItems(this.id, '0_1', true)" id="subItem_0_2">Modificar</a>
-                                        <a href="#!" class="collection-item per_user_3" onclick="selectionSubItems(this.id, '0_3', false)" id="subItem_0_3">Eliminar </a>
+                                        <a href="#!" class="collection-item per_user_0" onclick="selectionSubItems(this.id, '0_1', false)" id="subItem_0_1">Crear </a>
+                                        <a href="#!" class="collection-item per_user_1" onclick="selectionSubItems(this.id, '0_1', true)" id="subItem_0_2">Modificar</a>
+                                        <a href="#!" class="collection-item per_user_2" onclick="selectionSubItems(this.id, '0_3', false)" id="subItem_0_3">Eliminar </a>
 
                                     </div>
                                     <!--End  Items-->
@@ -294,7 +302,7 @@
                     <!--End cont search-->
 
                     <!--The onSubmit is responsible for executing the function to validate the text boxes correctly before sending data-->
-                    <form class="col s12  m12 l12" id="formCreateUpdate" onsubmit="validateTextBox(event)" >
+                    <form class="col s12  m12 l12" id="formCreateUpdate" onclick="validateTextBox(event,this.id)" >
                         <!--Start text info  -->
                          
                             <!-- Start Elements inputto remember: Elements unique with id of Button and input-->
@@ -302,79 +310,80 @@
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">perm_identity</i>
-                                    <input id="emp_name" type="text" class="validate" required>
-                                    <label for="emp_name">Nombre</label>
+                                    <input id="sEmp_name" type="text" class="validate" required>
+                                    <label for="sEmp_name">Nombre</label>
+                                </div>
+                                <!--End Elements -->
+                         
+                                <!--Start Elements -->
+                                <div class="input-field col s12 m6 l4">
+                                    <i class="material-icons prefix">perm_identity</i>
+                                    <input id="sEmp_surname" type="text" class="validate" required>
+                                    <label for="sEmp_surname">Apellido</label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">perm_identity</i>
-                                    <input id="emp_surname" type="text" class="validate" required>
-                                    <label for="emp_surname">Apellido</label>
-                                </div>
-                                <!--End Elements -->
-                                <!--Start Elements -->
-                                <div class="input-field col s12 m6 l4">
-                                    <i class="material-icons prefix">perm_identity</i>
-                                    <input id="emp_document" type="text" class="validate" required>
-                                    <label for="emp_document">Documento</label>
+                                    <input id="sEmp_document" type="text" class="validate" required>
+                                    <label for="sEmp_document">Documento</label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">room</i>
-                                    <input id="emp_address" type="text" class="validate" required>
-                                    <label for="emp_address">Direccion</label>
+                                    <input id="sEmp_addres" type="text" class="validate" required>
+                                    <label for="sEmp_addres">Direccion</label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">contact_phone</i>
-                                    <input id="emp_phone" type="tel" class="validate" pattern="^\d{7,10}" required>
-                                    <label for="emp_phone">Telefono</label>
+                                    <input id="sEmp_phone" type="tel" class="validate" pattern="^\d{7,10}" required>
+                                    <label for="sEmp_phone">Telefono</label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">contact_phone</i>
-                                    <input id="emp_phone2" type="tel" class="validate" pattern="^\d{7,10}">
-                                    <label for="emp_phone2">Telefono 2</label>
+                                    <input id="sEmp_phone2" type="tel" class="validate" pattern="^\d{7,10}">
+                                    <label for="sEmp_phone2">Telefono 2</label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">perm_phone_msg</i>
-                                    <input id="emp_cel_phone" type="tel" class="validate" pattern="^\d{7,10}" required>
-                                    <label for="emp_cel_phone">Celular</label>
+                                    <input id="sEmp_cell_phone" type="tel" class="validate" pattern="^\d{7,10}" required>
+                                    <label for="sEmp_cell_phone">Celular</label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">perm_phone_msg</i>
-                                    <input id="emp_cel_phone2" type="tel" pattern="^\d{7,10}" class="validate">
-                                    <label for="emp_cel_phone2">Celular 2</label>
+                                    <input id="sEmp_cell_phone2" type="tel" pattern="^\d{7,10}" class="validate">
+                                    <label for="sEmp_cell_phone2">Celular 2</label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">email</i>
-                                    <input id="emp_mail" type="email" class="validate" required>
-                                    <label for="emp_mail">Email</label>
+                                    <input id="sEmp_mail" type="email" class="validate" required>
+                                    <label for="sEmp_mail">Email</label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">email</i>
-                                    <input id="emp_mail2" type="email" class="validate">
-                                    <label for="emp_mail2">Email 2</label>
+                                    <input id="sEmp_mail2" type="email" class="validate">
+                                    <label for="sEmp_mail2">Email 2</label>
                                 </div>
                                 <!--End Elements -->
                                 
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l4">
                                     <i class="material-icons prefix">lock</i>
-                                    <input id="emp_password" type="password" class="validate" required>
-                                    <label for="emp_password">Contraseña </label>
+                                    <input id="sEmp_password" type="password" class="validate" required>
+                                    <label for="sEmp_password">Contraseña </label>
                                 </div>
                                 <!--End Elements -->
                                 <!--Start Elements -->
@@ -386,7 +395,7 @@
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l3">
-                                    <select id="listRole">
+                                    <select id="iRol_id">
                                   
                                     </select>
                                     <label>Seleccionar Rol</label>
@@ -394,7 +403,7 @@
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l3">
-                                    <select id="listPermission" multiple>
+                                    <select id="sEmp_permission" multiple>
                                         <option value="" disabled selected>Elija su opción</option>
                                         <option value="0">Crear</option>
                                         <option value="1">Modificar</option>
@@ -406,7 +415,7 @@
                                 <!--End Elements -->
                                 <!--Start Elements -->
                                 <div class="input-field col s12 m6 l3">
-                                    <select id="listBraBusiness">
+                                    <select id="iBra_buis_id">
                                     
                                     </select>
                                     <label>Seleccionar Sucursal Empresa</label>
@@ -420,7 +429,7 @@
                                             <input type="file">
                                         </div>
                                         <div class="file-path-wrapper">
-                                            <input id="emp_photo" class="file-path validate" type="text" placeholder="Seleccione una Foto">
+                                            <input id="sEmp_photo" class="file-path validate" type="text" placeholder="Seleccione una Foto">
                                         </div>
                                     </div>
                                 </div>
@@ -434,7 +443,7 @@
                             <div class="row">
                                 <div class="col s12 m12 l12">
                                     <div class="card-action center">
-                                        <button id="btnUpdateInsert" class="btn waves-effect waves-light" type="submit" name="action">
+                                        <button id="btnUpdateInsert" class="btn waves-effect waves-light" type="button" name="action">
                                             Enviar
                                             <i class="material-icons right">done</i>
                                         </button>
@@ -509,8 +518,7 @@
                     <!--End Table result search-->
                 </div>
                 <!--End Form 3-->
-
-                
+ 
 
         </div>
             <!--End  Container Form -->
@@ -542,7 +550,6 @@
     <script src="~/Content/materialize-v0.97.5/js/materialize.js"></script>
     <script src="~/Scripts/jsProject/Functions.js"></script>
     <script src="~/Scripts/jsProject/CtrEmployee.js"></script>
-
 
 </body>
 </html>

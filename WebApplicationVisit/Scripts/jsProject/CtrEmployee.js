@@ -7,7 +7,8 @@ Date :26/10/2016
 //Declarate Variable 
 var sNameTitle = "";
 var oObjectUser;
-var dataJson= new Object();
+var dataJson = new Object();
+var objectEmployectJson = new Object();
 var typeTatble = 0;
 var typeSelectionUpdateCreate = "";
 var textInfoForm;
@@ -31,13 +32,34 @@ $(document).ready(function () {
     dataJson.iBra_buis_id = 1;
     dataJson.bEmp_type_select = true;
     typeTatble = 0;
-    _getList();
+    //_getList();
     _getListRol();
     _getListBraBusiness();
+    _loadView();
     
     
 });
-
+function _loadView() {
+   
+    objectEmployectJson.sEmp_permission="";
+    objectEmployectJson.iEmp_id=0;
+    objectEmployectJson.iRol_id=0;
+    objectEmployectJson.iBra_buis_id=0;
+    objectEmployectJson.sEmp_document="";
+    objectEmployectJson.sEmp_name="";
+    objectEmployectJson.sEmp_surname ="";
+    objectEmployectJson.sEmp_phone="";
+    objectEmployectJson.sEmp_phone2="";
+    objectEmployectJson.sEmp_cell_phone="";
+    objectEmployectJson.sEmp_cell_phone2="";
+    objectEmployectJson.sEmp_addres="";
+    objectEmployectJson.sEmp_mail="";
+    objectEmployectJson.sEmp_mail2="";
+    objectEmployectJson.sEmp_password ="";
+    objectEmployectJson.bemp_state =true;
+    objectEmployectJson.sEmp_photo ="";
+    
+}
 //Function select Item 
 function selectionItem(item) {
     let titleSelection = $('#' + item + '').attr("title");
@@ -244,10 +266,10 @@ function validateSearch(e) {
     e.preventDefault();//not reload page
 }
 //Function  validate text box
-function validateTextBox(e) {
+function validateTextBox(e,id) {
 
 
-    let bValidate = true;
+   /* let bValidate = true;
     let bValidateMail = false;
     let listTextBox = new Array();
     let listSelect = new Array();
@@ -347,10 +369,99 @@ function validateTextBox(e) {
 
 
     }
+    
+    let formInputTel = $(form + " :input[type=tel]");
+    let formInputText = $(form + " :input[type=text]");
+    let formInputPassword = $(form + " :input[type=password]");
+    let formInputMail = $(form + " :input[type=email]");
+    let formInputSelect = $(form + " select");*/
+
+    let form = '#' + id;
+    //alert(formInputSelect.length);
+    let validate = true;
+        //Validate password input
+        
+   
+//Validate text input
+    if (!formInputText(form)) {
+        validate = false;
+    }
+    if (validate && (!formInputTel(form))) {
+        validate = false;
+    }
+    if (validate && (!formInputMail(form))) {
+        validate = false;
+    }
+    if (validate && ($('#sEmp_mail2').val() != "" || $('#sEmp_mail2').val() != null))
+    {
+        if ($('#sEmp_mail2').val() == $('#sEmp_mail').val()) {
+            validate = false;
+            $('#sEmp_mail2').addClass('invalid');
+            $('#sEmp_mail').addClass('invalid');
+        }
+    }
+    if (validate && (!formInputPassword(form))) {
+        validate = false;
+    }
+    if (validate && ($('#sEmp_password').val()!=$('#emp_password_confirm').val())) {
+        validate = false;
+       
+        $('#sEmp_password').addClass('invalid');
+        $('#emp_password_confirm').addClass('invalid');
+    }
+    if (validate && (!formInputSelect(form))) {
+        validate = false;
+    }
+    if (validate) {
+        $('input').removeClass('invalid');
+        createObjectJson(id);
+    }
+    //alert(formInputPassword.length);
     e.preventDefault();
     
 }
-
+//Function  creaye  object
+function createObjectJson(form_id) {
+    let form = '#' + form_id;
+    let formInput = $(form + " :input");
+    let id;
+    for (key in objectEmployectJson)
+    {
+        let data = $("#" + key).val();
+        
+        if (key == "sEmp_permission") {
+            data = $("#" + key).val().toString();
+        }
+         if (key == "iEmp_id") {
+            data = parseInt($("#" + key).val());
+        }
+        if (key == "iRol_id") {
+            data = parseInt($("#" + key).val());
+        }
+        if (key == "iBra_buis_id") {
+            data = parseInt($("#" + key).val());
+        }
+        if (key == "bemp_state") {
+            data = true;
+        }
+  
+            objectEmployectJson[key] = data;
+        
+        
+        //console.log("Is " + key + " - " + objectEmployectJson[key]);
+    }
+    
+    formInput.each(function (index) {
+     
+        // For debugging purposes...
+        let getId = $("#" + $(this).attr('id'));
+        id = getId;
+        //objectEmployectJson.id = 0;
+        let text = getId.val();
+       
+    });
+    console.log(objectEmployectJson);
+}
 //function  menu selection 
 function selectionStorages() {
     debugger;
@@ -431,7 +542,7 @@ function _getListRol() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            let select = $('#listRole');
+            let select = $('#iRol_id');
             select.append('<option value="" disabled selected>Elija su opción</option>');
             $.each(result, function (val, item) {
                 select.append('<option value="' + item.iRol_id + '">' + item.sRol_name + '</option>');
@@ -456,7 +567,7 @@ function _getListBraBusiness() {
         data: obj,
         dataType: "json",
         success: function (result) {
-            let select = $('#listBraBusiness');
+            let select = $('#iBra_buis_id');
             select.append('<option value="" disabled selected>Elija su opción</option>');
             $.each(result, function (val, item) {
                 select.append('<option value="' + item.iBra_buis_id + '">' + item.sBra_buis_name + '</option>');

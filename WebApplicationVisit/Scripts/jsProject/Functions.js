@@ -7,6 +7,7 @@ Date :20/10/2016
 //Variales
 var dato;
 const expressionData = /^\s+$/;
+const expressiomNumber = /^\d{7,10}/;
 const expressionEmail = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
 const expressionPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
 
@@ -322,7 +323,7 @@ function validateBoxEmail(input) {
 function validateBoxText(inputs) {
     let validate = true;
     for (let i = 0; i < inputs.length; i++) {
-       
+      
         if ((expressionData.test(inputs[i].val())) || (inputs[i].val().length<=0)) {
             inputs[i].addClass('invalid');
             validate = false;
@@ -371,6 +372,132 @@ function validateSelectList(lists) {
             } 
         }
     }
+
+    return validate;
+}
+
+
+
+
+
+
+//Function  validator
+function formInputTel(form) {
+    let validate = true;
+    let InputTel = $(form + " :input[type=tel]");
+    InputTel.each(function (index) {
+        // For debugging purposes...
+        let getId = $("#" + $(this).attr('id'));
+        let text = getId.val();
+        if (getId.prop('required')) {
+            if (!expressiomNumber.test(text) || text.length < 3) {
+                validate = false;
+                getId.addClass('invalid');
+            } else {
+                getId.removeClass('invalid');
+            }
+        } else {
+            if (text.length > 3 || text != "") {
+                if (!expressiomNumber.test(text) || text.length < 3) {
+                    validate = false;
+                    getId.addClass('invalid');
+                } else {
+                    getId.removeClass('invalid');
+                }
+            }
+        }
+    });
+    return validate;
+}
+function formInputText(form) {
+    let validate = true;
+    let InputText = $(form + " :input[type=text]");
+
+    InputText.each(function (index) {
+        // For debugging purposes...
+        let getId = $("#" + $(this).attr('id'));
+        let text = getId.val();
+        // console.log(text);
+        if (getId.prop('required')) {
+            if (expressionData.test(text) || text.length < 3) {
+                validate = false;
+                getId.addClass('invalid');
+            } else {
+                getId.removeClass('invalid');
+            }
+        } else {
+
+        }
+    });
+
+    return validate;
+}
+function formInputPassword(form) {
+    let validate = true;
+    let InputPassword = $(form + " :input[type=password]");
+    InputPassword.each(function (index) {
+        // For debugging purposes...
+        let getId = $("#" + $(this).attr('id'));
+        let text = getId.val();
+        if (getId.prop('required')) {
+            if (!expressionPassword.test(text)) {
+                validate = false;
+                getId.addClass('invalid');
+            } else {
+                getId.removeClass('invalid');
+            }
+        }
+
+    });
+    return validate;
+}
+function formInputMail(form) {
+    let validate = true;
+    let InputMail = $(form + " :input[type=email]");
+    InputMail.each(function (index) {
+        // For debugging purposes...
+        let getId = $("#" + $(this).attr('id'));
+        let text = getId.val();
+        if (getId.prop('required')) {
+            if (!expressionEmail.test(text)) {
+                validate = false;
+                getId.addClass('invalid');
+            } else {
+                getId.removeClass('invalid');
+            }
+        } else {
+            if (text.length > 3 || text != "") {
+                if (!expressionEmail.test(text) || text.length < 3) {
+                    validate = false;
+                    getId.addClass('invalid');
+                } else {
+                    getId.removeClass('invalid');
+                }
+            }
+        }
+
+    });
+    return validate;
+}
+function formInputSelect(form) {
+    let validate = true;
+    let InputSelect = $(form + " select");
+
+    InputSelect.each(function (index) {
+        // For debugging purposes...
+        let getId = $("#" + $(this).attr('id'));
+        let text = getId.val();
+        //console.log(text);
+        if (text != null) {
+            if (text.length == 0) {
+                validate = false;
+
+            }
+        } else {
+            validate = false;
+        }
+
+    });
 
     return validate;
 }
